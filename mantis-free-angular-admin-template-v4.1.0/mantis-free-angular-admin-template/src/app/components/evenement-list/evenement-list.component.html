@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 class="mt-4">Liste des Événements</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Date de Début</th>
+        <th>Date de Fin</th>
+        <th>Description</th> <!-- Ajout de la colonne Description -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evenement of evenements">
+        <td>{{ evenement.nomEvenement || 'Nom non disponible' }}</td>
+        <td>{{ evenement.dateDebut | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ evenement.dateFin | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ evenement.description || 'Aucune description disponible' }}</td> <!-- Affichage de la description -->
+        <td>
+          <button class="btn btn-gris-supprimer" (click)="deleteEvenement(evenement.idEvenement)">Supprimer</button>
+          <a [routerLink]="['/evenement/edit', evenement.idEvenement]" class="btn btn-gris-modifier">Modifier</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a [routerLink]="['/dashboard/default']" class="btn btn-gris">Retour à l'accueil</a>
+</div>

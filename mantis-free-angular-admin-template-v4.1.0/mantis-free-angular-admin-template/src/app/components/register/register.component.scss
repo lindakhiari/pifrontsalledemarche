@@ -1,0 +1,84 @@
+// Variables pour les couleurs et tailles
+$primary-color: #007bff;
+$secondary-color: #f9f9f9;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$btn-hover-color: #0056b3;
+
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: $secondary-color;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .register-card {
+    padding: 20px;
+    border-radius: 10px;
+
+    .form-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $input-border-color;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+
+      &:focus {
+        border-color: $input-focus-border-color;
+        outline: none;
+      }
+    }
+
+    .form-action {
+      margin-top: 20px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $btn-hover-color;
+      }
+    }
+
+    .login-redirect {
+      text-align: center;
+      margin-top: 15px;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

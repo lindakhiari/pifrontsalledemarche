@@ -1,0 +1,21 @@
+<div class="container">
+  <h2 class="mt-4">Modifier la Formation</h2>
+  <form (ngSubmit)="updateFormation()">
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input type="text" id="titre" [(ngModel)]="formation.titre" name="titre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" [(ngModel)]="formation.description" name="description" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="dateCreation" class="form-label">Date de Création</label>
+      <input type="date" id="dateCreation" [(ngModel)]="formation.dateCreation" name="dateCreation" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Mettre à jour</button>
+    <a [routerLink]="['/color']" class="btn btn-gris">Annuler</a>
+    <!-- Bouton pour revenir à la page d'accueil -->
+    <a [routerLink]="['/formations']" class="btn btn-gris">Retour à la liste des formations</a>
+  </form>
+</div>
