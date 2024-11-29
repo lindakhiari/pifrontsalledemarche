@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard/default',
+        redirectTo: '/register',
         pathMatch: 'full'
       },
       {
@@ -48,15 +49,7 @@ const routes: Routes = [
         path: 'progressions', // Ajout de la route pour le composant Progression
         loadComponent: () => import('./components/progression/progression.component').then(m => m.ProgressionComponent)
       },
-      {
-        path: 'login', // Ajout de la route pour le composant Progression
-        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
-      },
-      
-      {
-        path: 'register', // Ajout de la route pour le composant Progression
-        loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
-      },
+     
       {
         path: 'evenement/edit/:id',
         loadComponent: () => import('src/app/components/evenement-edit/evenement-edit.component').then(m => m.EvenementEditComponent)
@@ -66,7 +59,15 @@ const routes: Routes = [
   {
     path: '',
     component: GuestComponent,
-    children: [
+    children: [ {
+      path: 'login', // Ajout de la route pour le composant Progression
+      loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
+    },
+    
+    {
+      path: 'register', // Ajout de la route pour le composant Progression
+      loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
+    },
       
     ]
   }
