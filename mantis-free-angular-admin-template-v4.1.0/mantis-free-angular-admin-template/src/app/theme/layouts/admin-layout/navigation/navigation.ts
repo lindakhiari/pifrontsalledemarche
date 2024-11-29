@@ -19,64 +19,23 @@ export interface NavigationItem {
 }
 
 export const NavigationItems: NavigationItem[] = [
+
+ 
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'utilities',
+    title: 'gestions',
     type: 'group',
     icon: 'icon-navigation',
     children: [
+
       {
         id: 'default',
-        title: 'Default',
+        title: 'Potfolio',
         type: 'item',
         classes: 'nav-item',
         url: '/dashboard/default',
         icon: 'dashboard',
         breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'authentication',
-    title: 'Authentication',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'login',
-        title: 'Login',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/login',
-        icon: 'login',
-        target: true,
-        breadcrumbs: false
-      },
-      {
-        id: 'register',
-        title: 'Register',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'utilities',
-    title: 'UI Components',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Evenement',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'font-size'
       },
       {
         id: 'color',
@@ -87,14 +46,23 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'bg-colors'
       },
       {
-        id: 'tabler',
-        title: 'portfolio',
+        id: 'typography',
+        title: 'Evenement',
         type: 'item',
         classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
+        url: '/typography',
+        icon: 'font-size'
+      },
+     
+     
+      {
+        id: 'tabler',
+        title: 'actuariat',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard/default',
+        icon: 'dashboard',
+        breadcrumbs: false
       }
     ]
   },

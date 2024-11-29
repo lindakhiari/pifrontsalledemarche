@@ -15,30 +15,68 @@ export class RegisterComponent {
   username: string = '';
   email: string = '';
   password: string = '';
-  firstName: string = ''; // Nouveau champ pour le prénom
-  lastName: string = '';  // Nouveau champ pour le nom
+  firstName: string = '';
+  lastName: string = '';
+  role: string = 'USER'; // Rôle par défaut
 
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
+  availableRoles: string[] = ['USER', 'ADMIN']; // Liste des rôles disponibles
 
   constructor(private http: HttpClient, private router: Router) {}
 
   register() {
+    if (!this.validateInput()) {
+      this.errorMessage = 'Tous les champs sont requis et doivent être valides.';
+      return;
+    }
+
+    this.isLoading = true;
     const registerData = {
       username: this.username,
       email: this.email,
       password: this.password,
-      firstName: this.firstName, // Inclure le prénom
-      lastName: this.lastName   // Inclure le nom
-
+      firstName: this.firstName,
+      lastName: this.lastName,
+      role: this.role // Inclure le rôle sélectionné
     };
 
-    // Envoi de la requête POST en acceptant une réponse texte
     this.http.post('http://localhost:8089/ProjetSalleDeMarche/api/auth/register', registerData, { responseType: 'text' })
-      .subscribe(response => {
-        alert(response);  // Affiche le message de succès retourné par le backend
-        this.router.navigate(['/login']);  // Redirection vers la page de connexion après l'enregistrement
-      }, error => {
-        console.error('Registration failed', error);
-        alert('Registration failed');  // Affiche un message d'erreur si l'enregistrement échoue
+      .subscribe({
+        next: (response) => {
+          alert(response);
+          this.resetForm();
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Registration failed', error);
+          this.errorMessage = error.error || 'Échec de l’enregistrement. Réessayez.';
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
       });
+  }
+
+  private validateInput(): boolean {
+    return (
+      this.username.trim() !== '' &&
+      this.email.trim() !== '' &&
+      this.password.trim() !== '' &&
+      this.firstName.trim() !== '' &&
+      this.lastName.trim() !== '' &&
+      this.role.trim() !== ''
+    );
+  }
+
+  private resetForm(): void {
+    this.username = '';
+    this.email = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.role = 'USER'; // Réinitialiser le rôle par défaut
+    this.errorMessage = '';
   }
 }

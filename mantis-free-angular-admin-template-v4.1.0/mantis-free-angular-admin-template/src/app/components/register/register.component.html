@@ -1,6 +1,17 @@
 <div class="register-container">
   <div class="register-card">
     <h2 class="form-title">Sign Up</h2>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Indicateur de chargement -->
+    <div *ngIf="isLoading" class="loading-spinner">
+      Processing your request...
+    </div>
+
     <form (ngSubmit)="register()" class="register-form">
       <!-- First Name -->
       <div class="form-group">
@@ -72,9 +83,27 @@
         />
       </div>
 
+      <!-- Role -->
+      <div class="form-group">
+        <label for="role" class="form-label">Role*</label>
+        <select
+          id="role"
+          [(ngModel)]="role"
+          name="role"
+          required
+          class="form-select"
+        >
+          <option *ngFor="let availableRole of availableRoles" [value]="availableRole">
+            {{ availableRole }}
+          </option>
+        </select>
+      </div>
+
       <!-- Submit Button -->
       <div class="form-action">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button type="submit" [disabled]="isLoading" class="btn btn-primary">
+          {{ isLoading ? 'Signing Up...' : 'Sign Up' }}
+        </button>
       </div>
     </form>
 

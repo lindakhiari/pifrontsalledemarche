@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-
+import { AuthService } from 'src/app/services/auth.service';
 // third party
+import { Router } from '@angular/router';
 
 // icon
 import { IconService } from '@ant-design/icons-angular';
@@ -41,8 +42,9 @@ export class NavRightComponent {
   @Output() Customize = new EventEmitter();
   windowWidth: number;
   screenFull: boolean = true;
+ 
 
-  constructor(private iconService: IconService) {
+  constructor(private iconService: IconService,private authService: AuthService, private router: Router) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -108,4 +110,16 @@ export class NavRightComponent {
       title: 'History'
     }
   ];
+  editProfile() {
+    // Rediriger vers la page de modification du profil
+    this.router.navigate(['/edit-profile']);
+  }
+  viewProfile() {
+    // Rediriger vers la page de visualisation du profil
+    this.router.navigate(['/profile']);
+  }
+  logout() {
+    this.authService.logout(); // Appel de la méthode de déconnexion du service AuthService
+    this.router.navigate(['/login']); // Redirection vers la page de connexion après la déconnexion
+  }
 }

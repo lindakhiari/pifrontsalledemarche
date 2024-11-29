@@ -52,6 +52,7 @@ const routes: Routes = [
         path: 'login', // Ajout de la route pour le composant Progression
         loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
       },
+      
       {
         path: 'register', // Ajout de la route pour le composant Progression
         loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)

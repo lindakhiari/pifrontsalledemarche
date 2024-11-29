@@ -2,56 +2,72 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private authTokenSubject = new BehaviorSubject<string | null>(null);
+  private userRoleSubject = new BehaviorSubject<string | null>(null); // Gestion des rôles
   private readonly tokenKey = 'auth_token';
-  private readonly apiUrl = 'http://localhost:8089/ProjetSalleDeMarche/api/auth'; // URL d'authentification
+  private readonly apiUrl = 'http://localhost:8089/ProjetSalleDeMarche/api/auth';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router) {
     this.initializeToken();
   }
 
-  // Initialiser le token au chargement
   private initializeToken(): void {
     const token = localStorage.getItem(this.tokenKey);
     if (token) {
       if (!this.estTokenExpire(token)) {
-        this.authTokenSubject.next(token); // Initialiser le token si valide
+        this.authTokenSubject.next(token);
+        const role = this.decodeRoleFromToken(token);
+        this.userRoleSubject.next(role); // Initialiser le rôle
       } else {
-        this.logout(); // Supprimer le token expiré
+        this.logout();
       }
     }
   }
 
-  // Vérifie si le token est expiré
   estTokenExpire(token: string): boolean {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Décoder le payload du JWT
-      const expirationDate = payload.exp * 1000; // Expiration en millisecondes
-      return expirationDate < Date.now(); // Comparer à la date actuelle
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expirationDate = payload.exp * 1000;
+      return expirationDate < Date.now();
     } catch (error) {
       console.error('Erreur lors de la vérification du token:', error);
-      return true; // Considérer comme expiré en cas d'erreur
+      return true;
     }
   }
 
-  // Récupérer le token actuel
   getToken(): string | null {
     return this.authTokenSubject.getValue();
   }
 
-  // Méthode de connexion
+  private decodeRoleFromToken(token: string): string | null {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.role || null;
+    } catch (error) {
+      console.error('Erreur lors du décodage du rôle:', error);
+      return null;
+    }
+  }
+
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap((response) => {
         const token = response.accessToken?.trim();
         if (token) {
-          localStorage.setItem(this.tokenKey, token); // Stocker le token
-          this.authTokenSubject.next(token); // Mettre à jour le BehaviorSubject
+          localStorage.setItem(this.tokenKey, token);
+          this.authTokenSubject.next(token);
+
+          const role = this.decodeRoleFromToken(token);
+          if (role) {
+            this.userRoleSubject.next(role);
+          } else {
+            console.warn('Aucun rôle trouvé dans le JWT.');
+          }
         } else {
           throw new Error('Aucun jeton JWT reçu.');
         }
@@ -63,23 +79,29 @@ export class AuthService {
     );
   }
 
-  // Déconnexion
   logout(): void {
-    localStorage.removeItem(this.tokenKey); // Supprimer le token du stockage local
-    this.authTokenSubject.next(null); // Réinitialiser le BehaviorSubject
+    localStorage.removeItem(this.tokenKey);
+    this.authTokenSubject.next(null);
+    this.userRoleSubject.next(null);
+    this.router.navigate(['/login']); 
   }
 
-  // Vérifie si l'utilisateur est connecté
   isLoggedIn(): boolean {
     const token = this.getToken();
-    return !!token && !this.estTokenExpire(token); // Vérifie l'existence et la validité du token
+    return !!token && !this.estTokenExpire(token);
   }
 
-  // Gestion des erreurs standardisée
+  getUserRole(): string | null {
+    return this.userRoleSubject.getValue();
+  }
+
+  hasRole(role: string): boolean {
+    const userRole = this.getUserRole();
+    return userRole === role;
+  }
+
   private handleError(error: any): Observable<never> {
     console.error('Erreur HTTP:', error);
     return throwError(() => new Error(error.error?.message || 'Erreur serveur.'));
   }
- 
-  
 }
