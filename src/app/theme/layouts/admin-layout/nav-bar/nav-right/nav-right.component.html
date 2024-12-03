@@ -122,12 +122,11 @@
                 </a>
               </div>
             }
-            <div>
-              <a class="dropdown-item">
-                <i class="text-muted" antIcon theme="outline" type="logout"></i>
-                <span>Logout</span>
-              </a>
-            </div>
+            <a class="dropdown-item" (click)="logout()"> <!-- Ajoutez un événement de clic pour déconnecter l'utilisateur -->
+              <i class="text-muted" antIcon theme="outline" type="logout"></i>
+              <span>Logout</span>
+            </a>
+
           </ng-template>
         </li>
         <li ngbNavItem="2">

@@ -1,6 +1,8 @@
 // angular import
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service'; // Importer AuthService
+import { Router } from '@angular/router'; // Importer Router pour rediriger l'utilisateur
 
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -37,12 +39,14 @@ import {
   styleUrls: ['./nav-right.component.scss']
 })
 export class NavRightComponent {
+ 
+  
   @Input() styleSelectorToggle!: boolean;
   @Output() Customize = new EventEmitter();
   windowWidth: number;
   screenFull: boolean = true;
 
-  constructor(private iconService: IconService) {
+  constructor(private iconService: IconService, private authService: AuthService,private router: Router) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -108,4 +112,9 @@ export class NavRightComponent {
       title: 'History'
     }
   ];
+  logout(): void {
+    this.authService.logout(); // Appeler la méthode de déconnexion dans AuthService
+    this.router.navigate(['/login']); // Rediriger vers la page de connexion après déconnexion
+  }
+
 }

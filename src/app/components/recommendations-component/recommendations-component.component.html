@@ -1,0 +1,40 @@
+<div class="recommendations-container">
+    <h2>Rechercher des recommandations</h2>
+  
+    <!-- Recherche de formation -->
+    <div>
+      <button (click)="searchFormation()">Rechercher Formation</button>
+  
+      <!-- Affichage des résultats de la recherche de formation -->
+      <div *ngIf="formation || isLoadingFormation">
+        <div *ngIf="isLoadingFormation" class="loading">Chargement...</div>
+        <div *ngIf="formation">
+          <h3>Formation recommandée :</h3>
+          <p>{{ formation }}</p>
+        </div>
+        <div *ngIf="!formation && !isLoadingFormation">
+          <p>Aucune formation trouvée.</p>
+        </div>
+      </div>
+    </div>
+  
+    <hr />
+  
+    <!-- Recherche d'événements -->
+    <div>
+      <button (click)="searchEvenement()">Rechercher Événement</button>
+  
+      <!-- Affichage des résultats de la recherche d'événements -->
+      <div *ngIf="evenement || isLoadingEvent">
+        <div *ngIf="isLoadingEvent" class="loading">Chargement...</div>
+        <div *ngIf="evenement">
+          <h3>Événement recommandé :</h3>
+          <p>{{ evenement }}</p>
+        </div>
+        <div *ngIf="!evenement && !isLoadingEvent">
+          <p>Aucun événement trouvé.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

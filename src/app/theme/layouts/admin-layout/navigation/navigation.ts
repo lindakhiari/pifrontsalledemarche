@@ -19,9 +19,11 @@ export interface NavigationItem {
 }
 
 export const NavigationItems: NavigationItem[] = [
+ 
+  
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'utilities',
+    title: 'Gestions',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -33,16 +35,7 @@ export const NavigationItems: NavigationItem[] = [
         url: '/dashboard/default',
         icon: 'dashboard',
         breadcrumbs: false
-      }
-    ]
-  },
-  
-  {
-    id: 'utilities',
-    title: 'Gestions',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
+      },
       {
         id: 'typography',
         title: 'Evenement',
@@ -61,10 +54,10 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'tabler',
-        title: 'assurance',
+        title: 'progressions',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard/default',
+        url: '/progressions',
         icon: 'dashboard',
         breadcrumbs: false
       }

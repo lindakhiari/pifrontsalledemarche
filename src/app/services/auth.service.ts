@@ -68,6 +68,7 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey); // Supprimer le token du stockage local
     this.authTokenSubject.next(null); // Réinitialiser le BehaviorSubject
   }
+  
 
   // Vérifie si l'utilisateur est connecté
   isLoggedIn(): boolean {

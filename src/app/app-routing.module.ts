@@ -20,6 +20,10 @@ const routes: Routes = [
         loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent)
       },
       {
+        path: 'review',
+        loadComponent: () => import('src/app/components/review/review.component').then(c => c.ReviewComponent)
+      },
+      {
         path: 'typography',
         loadComponent: () => import('src/app/components/evenement-add/evenement-add.component').then(m => m.EvenementAddComponent)
       },
@@ -30,6 +34,10 @@ const routes: Routes = [
       {
         path: 'formations',
         loadComponent: () =>  import('src/app/components/formation-list/formation-list.component').then(m => m.FormationListComponent)
+      },
+      {
+        path: 'recommendations',
+        loadComponent: () =>  import('src/app/components/recommendations-component/recommendations-component.component').then(m => m.RecommendationsComponentComponent)
       },
      
       {
