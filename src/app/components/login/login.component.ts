@@ -3,14 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'; //
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [FormsModule, RouterModule, CommonModule]  ,
+  imports: [FormsModule, RouterModule, CommonModule],
   standalone: true
-
 })
 export class LoginComponent {
   username: string = '';
@@ -19,24 +18,41 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
+    // Vérification pour admin avec username et password "admin"
+    if (this.username === 'admin' && this.password === 'admin') {
+      // Simule un rôle d'administrateur sans utiliser JWT
+      const token = 'dummy-token-for-admin'; // Token factice pour admin
+      localStorage.setItem('auth_token', token);
+      localStorage.setItem('user_role', 'ROLE_ADMIN');
+
+      console.log('Connexion réussie pour l\'administrateur');
+      this.router.navigate(['/dashboard/default']); // Redirection tableau de bord admin
+      return; // Arrête l'exécution ici si c'est l'admin
+    }
+
+    // Si ce n'est pas l'admin, on continue avec l'authentification via l'API pour l'utilisateur
     const loginData = { username: this.username, password: this.password };
-  
+
     this.http.post('http://localhost:8089/ProjetSalleDeMarche/api/auth/login', loginData)
       .subscribe((response: any) => {
-        console.log('Login response:', response); 
-  
-        // Vérifiez si le token et le type sont présents dans la réponse
+        console.log('Login response:', response);
+
+        // Sauvegarde du token JWT et des rôles dans le localStorage
         const token = `${response.tokenType}${response.tokenType.trim() ? ' ' : ''}${response.accessToken}`;
-        
-        // Sauvegarde du token correctement formaté dans localStorage
         localStorage.setItem('auth_token', token);
-        console.log('Token sauvegardé dans localStorage:', token);
-  
-        this.router.navigate(['/dashboard/default']);  // Redirection après la connexion
+        localStorage.setItem('user_role', response.roles?.[0] || 'ROLE_USER'); // Par défaut, utilisateur
+
+        console.log('Token et rôle sauvegardés dans localStorage:', token, response.roles?.[0]);
+
+        // Redirection en fonction du rôle
+        if (response.roles?.[0] === 'ROLE_ADMIN') {
+          this.router.navigate(['/dashboard/default']); // Page admin
+        } else {
+          this.router.navigate(['/user-dashbord']); // Page utilisateur
+        }
       }, error => {
-        console.error('Login failed', error);
-        alert(`Login failed: ${error.statusText || 'Unknown error'}`);  // Affichage d'un message plus détaillé
+        console.error('Login échoué', error);
+        alert(`Erreur de connexion : ${error.error?.message || 'Erreur inconnue'}`);
       });
   }
-  
 }

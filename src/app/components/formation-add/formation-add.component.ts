@@ -1,35 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormationService } from '../../services/formation.service';
-import { AuthService } from 'src/app/services/auth.service'; // Import du service AuthService
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';  // Importation de RouterModule
 
 @Component({
   selector: 'app-formation-add',
   standalone: true,
   templateUrl: './formation-add.component.html',
   styleUrls: ['./formation-add.component.scss'],
-  imports: [FormsModule, RouterModule] 
+  imports: [FormsModule,RouterModule]  // Utilisation uniquement de FormsModule pour un formulaire template-driven
 })
 export class FormationAddComponent {
-  formation: any = { titre: '', description: '', dateCreation: '' };
+  formation: any = { titre: '', description: '', dateCreation: '', prix: '' }; // Initialisation de l'objet formation
 
   constructor(
     private formationService: FormationService,
-    private router: Router,
-    private authService: AuthService  // Injection du service AuthService
+    private router: Router
   ) {}
 
+  // Méthode pour ajouter une formation
   addFormation(): void {
-    const token = this.authService.getToken(); // Récupération du token d'authentification
-
-    if (!token) {
-      alert('Vous devez être connecté pour ajouter une formation.');
-      this.router.navigate(['/login']);  // Rediriger vers la page de connexion si l'utilisateur n'est pas authentifié
-      return;
-    }
-
+    // Appel au service pour ajouter la formation
     this.formationService.addFormation(this.formation).subscribe({
       next: (data) => {
         console.log('Formation ajoutée avec succès:', data);

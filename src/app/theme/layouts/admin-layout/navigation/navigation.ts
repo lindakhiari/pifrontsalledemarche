@@ -27,21 +27,13 @@ export const NavigationItems: NavigationItem[] = [
     type: 'group',
     icon: 'icon-navigation',
     children: [
-      {
-        id: 'default',
-        title: 'portfolio',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard/default',
-        icon: 'dashboard',
-        breadcrumbs: false
-      },
+     
       {
         id: 'typography',
         title: 'Evenement',
         type: 'item',
         classes: 'nav-item',
-        url: '/typography',
+        url: '/Evenement',
         icon: 'font-size'
       },
       {
@@ -49,18 +41,37 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Formation',
         type: 'item',
         classes: 'nav-item',
-        url: '/color',
+        url: '/Formation',
         icon: 'bg-colors'
       },
       {
         id: 'tabler',
-        title: 'progressions',
+        title: 'recommendation-chart',
         type: 'item',
         classes: 'nav-item',
-        url: '/progressions',
+        url: '/recommendation-chart',
         icon: 'dashboard',
         breadcrumbs: false
-      }
+      },
+      {
+        id: 'tabler',
+        title: 'review-chart',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/review-chart',
+        icon: 'dashboard',
+        breadcrumbs: false
+      },
+      {
+        id: 'tabler',
+        title: 'liste-user',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/liste-user',
+        icon: 'dashboard',
+        breadcrumbs: false
+      },
+
     ]
   },
 

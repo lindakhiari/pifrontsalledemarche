@@ -1,85 +1,150 @@
-<div class="register-container">
-  <div class="register-card">
-    <h2 class="form-title">Sign Up</h2>
-    <form (ngSubmit)="register()" class="register-form">
-      <!-- First Name -->
-      <div class="form-group">
-        <label for="firstName" class="form-label">First Name*</label>
-        <input
-          type="text"
-          id="firstName"
-          [(ngModel)]="firstName"
-          name="firstName"
-          required
-          class="form-input"
-          placeholder="Enter your first name"
-        />
+<div class="auth-main">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="auth-header">
+        <a href="javascript:"><img src="assets/images/logo-dark.svg" alt="logo img" /></a>
+      </div>
+      <div class="card my-5">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-end mb-4">
+            <h3 class="mb-0"><b>Sign Up</b></h3>
+            <a [routerLink]="['/login']" class="link-primary">Already have an account?</a>
+          </div>
+
+          <!-- Sign up Form -->
+          <form (ngSubmit)="register()" class="register-form">
+            <!-- First Name -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="firstName">First Name*</label>
+              <input
+                type="text"
+                id="firstName"
+                [(ngModel)]="firstName"
+                name="firstName"
+                required
+                class="form-control"
+                placeholder="Enter your first name"
+              />
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="lastName">Last Name*</label>
+              <input
+                type="text"
+                id="lastName"
+                [(ngModel)]="lastName"
+                name="lastName"
+                required
+                class="form-control"
+                placeholder="Enter your last name"
+              />
+            </div>
+
+            <!-- Username -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="username">Username*</label>
+              <input
+                type="text"
+                id="username"
+                [(ngModel)]="username"
+                name="username"
+                required
+                class="form-control"
+                placeholder="Choose a username"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="email">Email Address*</label>
+              <input
+                type="email"
+                id="email"
+                [(ngModel)]="email"
+                name="email"
+                required
+                class="form-control"
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <!-- Password -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password*</label>
+              <input
+                type="password"
+                id="password"
+                [(ngModel)]="password"
+                name="password"
+                required
+                class="form-control"
+                placeholder="Create a password"
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-action mt-3">
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+          </form>
+
+          <p class="mt-4 text-sm text-muted">
+            By signing up, you agree to our
+            <a href="javascript:" class="text-primary">Terms of Service</a>
+            and
+            <a href="javascript:" class="text-primary">Privacy Policy</a>
+          </p>
+
+          <div class="saprator mt-3">
+            <span>Sign up with</span>
+          </div>
+
+          <!-- Social Sign Up Options -->
+          <div class="row">
+            <div class="col-4">
+              <div class="d-grid">
+                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                  <img src="assets/images/google-icon.svg" alt="google img" />
+                  <span class="d-none d-sm-inline-block">Google</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                  <img src="assets/images/facebook-icon.svg" alt="facebook img" />
+                  <span class="d-none d-sm-inline-block">Facebook</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                  <img src="assets/images/twitter-icon.svg" alt="twitter img" />
+                  <span class="d-none d-sm-inline-block">Twitter</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Last Name -->
-      <div class="form-group">
-        <label for="lastName" class="form-label">Last Name*</label>
-        <input
-          type="text"
-          id="lastName"
-          [(ngModel)]="lastName"
-          name="lastName"
-          required
-          class="form-input"
-          placeholder="Enter your last name"
-        />
+      <div class="auth-footer row">
+        <div class="col my-1">
+          <p class="m-0">
+            Copyright ©
+            <a href="https://codedthemes.com/" target="_blank">CodedThemes</a>
+          </p>
+        </div>
+        <div class="col-auto my-1">
+          <ul class="list-inline footer-link mb-0">
+            <li class="list-inline-item"><a href="https://codedthemes.com/" target="_blank">Home</a></li>
+            <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/" target="_blank">Contact us</a></li>
+          </ul>
+        </div>
       </div>
-
-      <!-- Username -->
-      <div class="form-group">
-        <label for="username" class="form-label">Username*</label>
-        <input
-          type="text"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
-          required
-          class="form-input"
-          placeholder="Choose a username"
-        />
-      </div>
-
-      <!-- Email -->
-      <div class="form-group">
-        <label for="email" class="form-label">Email Address*</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          required
-          class="form-input"
-          placeholder="Enter your email address"
-        />
-      </div>
-
-      <!-- Password -->
-      <div class="form-group">
-        <label for="password" class="form-label">Password*</label>
-        <input
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          required
-          class="form-input"
-          placeholder="Create a password"
-        />
-      </div>
-
-      <!-- Submit Button -->
-      <div class="form-action">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-      </div>
-    </form>
-
-    <p class="login-redirect">
-      Already have an account? <a routerLink="/login">Login here</a>
-    </p>
+    </div>
   </div>
 </div>

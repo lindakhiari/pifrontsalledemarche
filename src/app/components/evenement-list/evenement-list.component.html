@@ -7,6 +7,7 @@
         <th>Date de Début</th>
         <th>Date de Fin</th>
         <th>Description</th> <!-- Ajout de la colonne Description -->
+        <th>Prix</th> <!-- Ajout de la colonne Prix -->
         <th>Actions</th>
       </tr>
     </thead>
@@ -16,6 +17,7 @@
         <td>{{ evenement.dateDebut | date: 'dd/MM/yyyy' }}</td>
         <td>{{ evenement.dateFin | date: 'dd/MM/yyyy' }}</td>
         <td>{{ evenement.description || 'Aucune description disponible' }}</td> <!-- Affichage de la description -->
+        <td>{{ evenement.prix ? '$' + evenement.prix : 'Prix non disponible' }}</td> <!-- Affichage du prix avec symbole $ -->
         <td>
           <button class="btn btn-gris-supprimer" (click)="deleteEvenement(evenement.idEvenement)">Supprimer</button>
           <a [routerLink]="['/evenement/edit', evenement.idEvenement]" class="btn btn-gris-modifier">Modifier</a>

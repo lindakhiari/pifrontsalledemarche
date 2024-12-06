@@ -1,40 +1,22 @@
 <div class="recommendations-container">
-    <h2>Rechercher des recommandations</h2>
-  
-    <!-- Recherche de formation -->
-    <div>
-      <button (click)="searchFormation()">Rechercher Formation</button>
-  
-      <!-- Affichage des résultats de la recherche de formation -->
-      <div *ngIf="formation || isLoadingFormation">
-        <div *ngIf="isLoadingFormation" class="loading">Chargement...</div>
-        <div *ngIf="formation">
-          <h3>Formation recommandée :</h3>
-          <p>{{ formation }}</p>
+  <h2>Recommandations</h2>
+
+  <!-- Vérification si des recommandations sont disponibles -->
+  <div *ngIf="recommandations.length > 0; else noRecommendations">
+    <ul>
+      <!-- Boucle à travers les recommandations et affichage de chaque élément -->
+      <li *ngFor="let recommandation of recommandations">
+        <div class="recommendation">
+          <h3>{{ recommandation.formation }}</h3>
+          <p>{{ recommandation.evenement }}</p>
         </div>
-        <div *ngIf="!formation && !isLoadingFormation">
-          <p>Aucune formation trouvée.</p>
-        </div>
-      </div>
-    </div>
-  
-    <hr />
-  
-    <!-- Recherche d'événements -->
-    <div>
-      <button (click)="searchEvenement()">Rechercher Événement</button>
-  
-      <!-- Affichage des résultats de la recherche d'événements -->
-      <div *ngIf="evenement || isLoadingEvent">
-        <div *ngIf="isLoadingEvent" class="loading">Chargement...</div>
-        <div *ngIf="evenement">
-          <h3>Événement recommandé :</h3>
-          <p>{{ evenement }}</p>
-        </div>
-        <div *ngIf="!evenement && !isLoadingEvent">
-          <p>Aucun événement trouvé.</p>
-        </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
-  
+
+  <!-- Message affiché si aucune recommandation n'est disponible -->
+  <ng-template #noRecommendations>
+    <p *ngIf="!errorMessage">Aucune recommandation disponible pour le moment.</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </ng-template>
+</div>

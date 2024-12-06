@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +9,11 @@ import { AuthService } from './auth.service';
 export class FormationService {
   private apiUrl = 'http://localhost:8089/ProjetSalleDeMarche/formations';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  // Générer les en-têtes d'autorisation
+  // Générer les en-têtes d'autorisation (sans token)
   private getHeaders(): HttpHeaders {
-    const token = this.authService.getToken();
-
-    if (!token) {
-      console.warn('Aucun jeton JWT trouvé.');
-      return new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-    }
-
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
   }
@@ -36,7 +22,6 @@ export class FormationService {
   private handleError(error: any): Observable<never> {
     if (error.status === 401) {
       console.error('Erreur 401 - Non autorisé :', error.message);
-      // Ne redirige plus vers /login, mais retourne une erreur appropriée.
     } else {
       console.error('Erreur API :', error);
     }

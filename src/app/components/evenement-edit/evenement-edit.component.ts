@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EvenementService } from 'src/app/services/evenement.service';
-import { AuthService } from 'src/app/services/auth.service'; // Import du service AuthService
 import { FormsModule } from '@angular/forms'; // Importer FormsModule
 import { CommonModule } from '@angular/common'; // Importer CommonModule
 import { RouterModule } from '@angular/router'; // Importer RouterModule
@@ -18,19 +17,13 @@ export class EvenementEditComponent implements OnInit {
 
   constructor(
     private evenementService: EvenementService,
-    private authService: AuthService, // Injection du service AuthService
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const token = this.authService.getToken();
-    if (!token) {
-      alert('Vous devez être connecté pour accéder à cette page.');
-      return;
-    }
-
     const id = +this.route.snapshot.paramMap.get('id')!;
+
     if (!id) {
       alert('L\'ID de l\'événement est invalide.');
       return;
@@ -54,12 +47,6 @@ export class EvenementEditComponent implements OnInit {
   }
 
   updateEvenement(): void {
-    const token = this.authService.getToken();
-    if (!token) {
-      alert('Votre session a expiré. Veuillez vous reconnecter.');
-      return;
-    }
-
     if (!this.evenement || !this.evenement.idEvenement) {
       console.error('ID de l\'événement manquant');
       alert('L\'ID de l\'événement est invalide.');

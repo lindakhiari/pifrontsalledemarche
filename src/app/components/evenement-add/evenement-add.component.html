@@ -17,6 +17,10 @@
       <label for="dateFin" class="form-label">Date de fin</label>
       <input type="date" id="dateFin" formControlName="dateFin" class="form-control">
     </div>
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix</label>
+      <input type="number" id="prix" formControlName="prix" class="form-control" min="0" required>
+    </div>
     <button type="submit" class="btn btn-success">Ajouter</button>
     <a [routerLink]="['/evenements']" class="btn btn-secondary">Annuler</a>
   </form>

@@ -3,7 +3,7 @@ import { FormationService } from '../../services/formation.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-formation-list',
   templateUrl: './formation-list.component.html',
@@ -13,22 +13,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FormationListComponent implements OnInit {
   formations: any[] = [];
-  router: any;
   errorMessage: string;
 
-  constructor(private formationService: FormationService,private authService: AuthService) {}
+  constructor(private formationService: FormationService) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('auth_token');
-    if (!token) {
-      console.error('Utilisateur non connecté. Redirection...');
-     
-    } else {
-      this.loadFormations();
-      this.getFormations();
-    }
+    // Suppression de la logique liée à l'authentification
+    this.loadFormations();
   }
-  
 
   getFormations(): void {
     this.formationService.getFormations().subscribe(
@@ -41,6 +33,7 @@ export class FormationListComponent implements OnInit {
       }
     );
   }
+
   loadFormations(): void {
     this.formationService.getFormations().subscribe({
       next: (data) => {
@@ -66,5 +59,4 @@ export class FormationListComponent implements OnInit {
       }
     });
   }
-  
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,38 @@ export class AuthService {
     console.error('Erreur HTTP:', error);
     return throwError(() => new Error(error.error?.message || 'Erreur serveur.'));
   }
- 
+
+  getUsers(): Observable<any[]> {
+    // Suppression de la gestion du token
+    // Pas besoin de vérifier le token ou de l'ajouter dans les en-têtes
+  
+    // Utilisation de l'URL correcte directement ici
+    return this.http.get<any[]>('http://localhost:8089/ProjetSalleDeMarche/api/users').pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des utilisateurs:', error);
+        return throwError(() => new Error(error.error?.message || 'Erreur lors de la récupération des utilisateurs.'));
+      })
+    );
+  }
+  
+  // Méthode pour supprimer un utilisateur par ID
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8089/ProjetSalleDeMarche/user/supprimer/${id}`);
+  }
+  
+  updateUser(id: number, user: any): Observable<any> {
+    return this.http.put<any>(`http://localhost:8089/ProjetSalleDeMarche/upade/${id}`, user);
+  }
+  
+  getUserById(id: number): Observable<any> {
+    // Effectuer la requête HTTP pour récupérer l'utilisateur par ID
+    return this.http.get<any>(`http://localhost:8089/ProjetSalleDeMarche/find/${id}`).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+        return throwError(() => new Error(error.error?.message || 'Erreur lors de la récupération de l\'utilisateur.'));
+      })
+    );
+  }
+  
   
 }

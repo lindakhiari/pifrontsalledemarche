@@ -29,6 +29,7 @@ export class EvenementAddComponent implements OnInit {
       description: [''],
       dateDebut: ['', [Validators.required]],
       dateFin: ['', [Validators.required]],
+      prix: ['', [Validators.required, Validators.min(0)]], // Ajout du champ prix
     });
   }
 

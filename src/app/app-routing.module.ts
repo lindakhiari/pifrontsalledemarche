@@ -4,79 +4,50 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
+import { RecommendationChartComponent } from './recommendation-chart/recommendation-chart.component';  // Import du composant
+import { SentimentChartComponent } from './components/sentiment-chart/sentiment-chart.component';
 
-const routes: Routes = [
+const adminRoutes: Routes = [
   {
     path: '',
     component: AdminComponent,
     children: [
-      {
-        path: '',
-        redirectTo: '/register',
-        pathMatch: 'full'
-      },
-      {
-        path: 'dashboard/default',
-        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent)
-      },
-      {
-        path: 'review',
-        loadComponent: () => import('src/app/components/review/review.component').then(c => c.ReviewComponent)
-      },
-      {
-        path: 'typography',
-        loadComponent: () => import('src/app/components/evenement-add/evenement-add.component').then(m => m.EvenementAddComponent)
-      },
-      {
-        path: 'evenements',
-        loadComponent: () => import('src/app/components/evenement-list/evenement-list.component').then(m => m.EvenementListComponent)
-      },
-      {
-        path: 'formations',
-        loadComponent: () =>  import('src/app/components/formation-list/formation-list.component').then(m => m.FormationListComponent)
-      },
-      {
-        path: 'recommendations',
-        loadComponent: () =>  import('src/app/components/recommendations-component/recommendations-component.component').then(m => m.RecommendationsComponentComponent)
-      },
-     
-      {
-        path: 'color',
-        loadComponent: () => import('src/app/components/formation-add/formation-add.component').then(m => m.FormationAddComponent)
-      },
-      {
-        path: 'formations/edit/:id',
-        loadComponent: () => import('./components/formation-edit/formation-edit.component').then(m => m.FormationEditComponent)
-      },
-      {
-        path: 'sample-page',
-        loadComponent: () => import('./demo/other/sample-page/sample-page.component')
-      },
-      {
-        path: 'progressions', // Ajout de la route pour le composant Progression
-        loadComponent: () => import('./components/progression/progression.component').then(m => m.ProgressionComponent)
-      },
-     
-      {
-        path: 'evenement/edit/:id',
-        loadComponent: () => import('src/app/components/evenement-edit/evenement-edit.component').then(m => m.EvenementEditComponent)
-      },
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'dashboard/default', loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent) },
+      { path: 'review', loadComponent: () => import('src/app/components/review/review.component').then(c => c.ReviewComponent) },
+      { path: 'Evenement', loadComponent: () => import('src/app/components/evenement-add/evenement-add.component').then(m => m.EvenementAddComponent) },
+      { path: 'evenements', loadComponent: () => import('src/app/components/evenement-list/evenement-list.component').then(m => m.EvenementListComponent) },
+      { path: 'formations', loadComponent: () => import('src/app/components/formation-list/formation-list.component').then(m => m.FormationListComponent) },
+      { path: 'recommendations', loadComponent: () => import('src/app/components/recommendations-component/recommendations-component.component').then(m => m.RecommendationsComponentComponent) },
+      { path: 'recommendation-chart', component: RecommendationChartComponent },
+      { path: 'review-chart', loadComponent: () => import('src/app/components/sentiment-chart/sentiment-chart.component').then(m => m.SentimentChartComponent) },
+      { path: 'Formation', loadComponent: () => import('src/app/components/formation-add/formation-add.component').then(m => m.FormationAddComponent) },
+      { path: 'formations/edit/:id', loadComponent: () => import('./components/formation-edit/formation-edit.component').then(m => m.FormationEditComponent) },
+      { path: 'evenement/edit/:id', loadComponent: () => import('src/app/components/evenement-edit/evenement-edit.component').then(m => m.EvenementEditComponent) },
+      { path: 'inscritevent', loadComponent: () => import('./components/inscriptionevent/inscriptionevent.component').then(m => m.InscriptioneventComponent) },
+      { path: 'inscriptionformation', loadComponent: () => import('./components/inscriptionformation/inscriptionformation.component').then(m => m.InscriptionformationComponent) },
+      { path: 'liste-user', loadComponent: () => import('./components/user-list/user-list.component').then(m => m.UserListComponent) },
+      { path: 'modifier-user/:id', loadComponent: () => import('src/app/user-edit/user-edit.component').then(m => m.UserEditComponent) }
     ]
-  },
+  }
+];
+
+const userRoutes: Routes = [
   {
     path: '',
     component: GuestComponent,
-    children: [ {
-      path: 'login', // Ajout de la route pour le composant Progression
-      loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
-    },
-    {
-      path: 'register', // Ajout de la route pour le composant Progression
-      loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
-    },
-      
+    children: [
+      { path: 'login', loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent) },
+      { path: 'register', loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent) },
+      // Ajoute ici la route pour le dashboard utilisateur
+      { path: 'user-dashbord', loadComponent: () => import('src/app/components/user-dashboard/user-dashboard.component').then(m => m.UserDashboardComponent) }
     ]
   }
+];
+
+const routes: Routes = [
+  ...adminRoutes,  // Routes admin
+  ...userRoutes    // Routes utilisateur
 ];
 
 @NgModule({

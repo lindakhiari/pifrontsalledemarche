@@ -3,7 +3,6 @@
   <form (ngSubmit)="updateEvenement()">
     <div class="mb-3">
       <label for="nom" class="form-label">Nom</label>
-      <!-- Correction : utilisez evenement.nomEvenement au lieu de evenement.nom -->
       <input type="text" id="nom" [(ngModel)]="evenement.nomEvenement" name="nomEvenement" class="form-control" required />
     </div>
 
@@ -19,9 +18,16 @@
       <input type="date" id="dateFin" [(ngModel)]="evenement.dateFin" name="dateFin" class="form-control" required />
     </div>
 
+    <!-- Champ pour la description -->
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
       <textarea id="description" [(ngModel)]="evenement.description" name="description" class="form-control" required></textarea>
+    </div>
+
+    <!-- Champ pour le prix -->
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix</label>
+      <input type="number" id="prix" [(ngModel)]="evenement.prix" name="prix" class="form-control" required />
     </div>
 
     <button type="submit" class="btn btn-success">Mettre à jour</button>

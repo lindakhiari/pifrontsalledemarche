@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormationService } from '../../services/formation.service';
-import { AuthService } from '../../services/auth.service'; // Import du service AuthService
 import { FormsModule } from '@angular/forms'; // Importer FormsModule
 import { CommonModule } from '@angular/common'; // Importer CommonModule
 import { RouterModule } from '@angular/router'; // Importer RouterModule
@@ -14,23 +13,15 @@ import { RouterModule } from '@angular/router'; // Importer RouterModule
   imports: [FormsModule, CommonModule, RouterModule],
 })
 export class FormationEditComponent implements OnInit {
-  formation: any;
+  formation: any = { titre: '', description: '', dateCreation: '', prix: '' }; // Ajout de prix ici
 
   constructor(
     private formationService: FormationService,
-    private authService: AuthService, // Injection du service AuthService
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const token = this.authService.getToken();
-    if (!token) {
-      alert('Vous devez être connecté pour accéder à cette page.');
-     
-      return;
-    }
-
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.formationService.getFormationById(id).subscribe({
       next: (data: any) => {
@@ -44,13 +35,6 @@ export class FormationEditComponent implements OnInit {
   }
 
   updateFormation(): void {
-    const token = this.authService.getToken();
-    if (!token) {
-      alert('Votre session a expiré. Veuillez vous reconnecter.');
-     
-      return;
-    }
-
     this.formationService.updateFormation(this.formation.id, this.formation).subscribe({
       next: (data) => {
         console.log('Formation mise à jour avec succès:', data);
