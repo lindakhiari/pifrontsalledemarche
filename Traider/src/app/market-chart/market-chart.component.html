@@ -6,12 +6,21 @@
       <div class="chart-container">
         <h2 class="chart-title">Graphique des prix pour {{ selectedSymbol }}</h2>
         <div class="alert alert-info" *ngIf="balance !== undefined">
-          Solde du portefeuille : {{ balance | currency }}
+          Solde du portefeuille : 1,250,200
         </div>
         <select [(ngModel)]="selectedSymbol" (change)="onSymbolChange(selectedSymbol)" class="form-select mb-3">
           <option *ngFor="let symbol of symbols" [value]="symbol">{{ symbol }}</option>
         </select>
-
+        <div class="time-intervals">
+          <button (click)="setTimeInterval('1H')">1Min</button>
+          <button (click)="setTimeInterval('5H')">5Min</button>
+          <button (click)="setTimeInterval('1H')">1H</button>
+          <button (click)="setTimeInterval('5H')">5H</button>
+          <button (click)="setTimeInterval('1J')">1J</button>
+          <button (click)="setTimeInterval('7J')">7J</button>
+          <button (click)="setTimeInterval('1Mois')">1 Mois</button>
+      </div>
+      
         <ngx-charts-line-chart
           [view]="chartOptions.view"
           [scheme]="chartOptions.colorScheme"
@@ -26,6 +35,87 @@
           [autoScale]="chartOptions.autoScale"
           [curve]="chartOptions.curve">
         </ngx-charts-line-chart>
+         <!-- Sélection de l'indicateur -->
+      <div class="mt-4">
+        <label for="indicatorSelect" class="form-label">Sélectionnez un indicateur :</label>
+        <select [(ngModel)]="selectedIndicator" (change)="onIndicatorChange(selectedIndicator)" class="form-select" id="indicatorSelect">
+          <option *ngFor="let indicator of indicators" [value]="indicator">{{ indicator }}</option>
+        </select>
+      </div>
+
+      <div class="mt-3" *ngIf="selectedIndicator === 'RSI'">
+        <h2>Graphique RSI</h2>
+        <ngx-charts-line-chart
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="rsiData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [xAxisLabel]="'Temps'"
+          [showYAxisLabel]="true"
+          [yAxisLabel]="'RSI'"
+          [autoScale]="true">
+        </ngx-charts-line-chart>
+      </div>
+
+      <div class="mt-3" *ngIf="selectedIndicator === 'MACD'">
+        <h2>Graphique MACD</h2>
+        <ngx-charts-line-chart
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="macdData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [xAxisLabel]="'Temps'"
+          [showYAxisLabel]="true"
+          [yAxisLabel]="'MACD'"
+          [autoScale]="true">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-md-5 mt-5">
+    <div class="prediction-container p-4 border rounded shadow">
+      <h3 class="text-center mb-4">Prédictions du marché</h3>
+  
+      <!-- Chargement -->
+      <div *ngIf="!prediction && !error" class="loading-section text-center">
+        <p class="mb-3">Chargement...</p>
+        <div class="progress mb-3">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            [style.width.%]="loadingProgress"
+            [attr.aria-valuenow]="loadingProgress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {{ loadingProgress }}%
+          </div>
+        </div>
+        <p>Analyse des données en cours...</p>
+      </div>
+  
+      <!-- Résultats -->
+      <div *ngIf="prediction" class="prediction-result text-center">
+        <h4>Résultat de l'analyse</h4>
+        <p><strong>Décision :</strong> {{ prediction.decision }}</p>
+        <p><strong>Confiance :</strong> {{ prediction.confidence }}%</p>
+        <p><strong>Timestamp :</strong> {{ prediction.timestamp }}</p>
+      </div>
+  
+      <!-- Erreur -->
+      <div *ngIf="error" class="error-section text-center text-danger">
+        <p>{{ error }}</p>
+      </div>
+    </div>
+  </div>
+  
        <!-- Boutons d'action pour afficher/masquer le formulaire -->
 <div class="d-flex justify-content-end mt-3">
   <button class="btn btn-success me-2" (click)="openPositionForm('buy')">

@@ -20,6 +20,7 @@ import { AppRoutingModule } from '../app.routes';
 import { Position } from '../../Position';
 import { Order, OrderBookService } from '../../orderBookService';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { PredictionService } from '../prediction.service';
 interface MarketData {
   id: number;
   symbol: string;
@@ -42,7 +43,11 @@ interface SeriesData {
   imports: [NgxChartsModule, FormsModule, CommonModule,NavbarComponent]
 })
 export class MarketChartComponent implements OnInit, OnDestroy {
-  indicators: Indicator[] = [];
+  //indicators: Indicator[] = [];
+  indicators: string[] = ['RSI', 'MACD'];
+  selectedIndicator: string = '';
+  rsiData: { name: string; value: number[] }[] = [];
+  macdData:{ name: string; value: number[] }[] = [];
   view: [number, number] = [1500, 600]; // Taille du graphique
   symbols = ['AAPL', 'GOOGL', 'BTC', 'USD']; // Liste des symboles disponibles
   selectedSymbol: string = this.symbols[0]; // Symbole par défaut
@@ -68,6 +73,12 @@ export class MarketChartComponent implements OnInit, OnDestroy {
   symbol: string = ''; // Le symbole de l'actif
   quantity: number = 0;
   entryPrice: number = 0;
+  prediction: any = null;
+  error: string | null = null;
+  isLoading: boolean = true;
+loadingProgress: number = 0;
+predictionData: { confidence: number; decision: string; timestamp: string } | null = null;
+predictionChartData: any[] = [];
   stopLoss: number = 0;
   takeProfit: number = 0;
   positionType: string = 'buy';
@@ -90,7 +101,9 @@ export class MarketChartComponent implements OnInit, OnDestroy {
   bids: Order[] = []; // Initialisez comme tableau vide
   asks: Order[] = [];
   private pollingInterval: any;
+  selectedInterval: string='';
   constructor(private marketDataService: MarketDataService,
+              private predictionService:PredictionService,
               private orderBookService: OrderBookService,
               private http: HttpClient,
               private cdr: ChangeDetectorRef,
@@ -110,16 +123,45 @@ export class MarketChartComponent implements OnInit, OnDestroy {
       }
     );
   }
+  setTimeInterval(interval: string) {
+    this.selectedInterval = interval;
+    this.fetchDataForInterval(interval);
+}
+
+fetchDataForInterval(interval: string) {
+    this.http.get(`http://localhost:8089/ProjetSalleDeMarche/portfolio/chart-data?interval=${interval}`).subscribe((data: any) => {
+        this.chartData = this.formatChartData1(data);
+    });
+}
+formatChartData1(data: any): any[] {
+  // Vérifier que les données existent et sont dans le bon format
+  if (!data || !Array.isArray(data)) {
+      console.error("Invalid data format received:", data);
+      return [];
+  }
+
+  // Transformer les données pour qu'elles soient compatibles avec le graphique
+  return data.map((item: any) => {
+      return {
+          name: new Date(item.timestamp).toLocaleString(), // Convertit le timestamp en une date lisible
+          value: item.price, // Assigne la valeur du prix
+      };
+  });
+}
+
+
   loadEntryLine() {
     this.entryLine = this.calculateEntryLine(); // Calculer ou récupérer la ligne d'entrée
   }
-
+  onIndicatorChange(indicator: string): void {
+    this.selectedIndicator = indicator;
+  }
   initializeChartOptions(marketData: MarketData[]): void {
     const categories = marketData.map(data => new Date(data.timestamp).toISOString());
     const seriesData = marketData.map(data => data.price);
   
     this.chartOptions = {
-      view: [800, 500],
+      view: [1200, 600],
       colorScheme: {
         domain: ['#60a5fa', '#fbbf24', '#34d399', '#f87171', '#818cf8', '#a78bfa']
       },
@@ -140,6 +182,7 @@ export class MarketChartComponent implements OnInit, OnDestroy {
     };
 }
 
+
   // Exemple de méthode pour calculer la ligne d'entrée
   calculateEntryLine(): number | null {
     // Logique pour déterminer la ligne d'entrée en fonction des positions
@@ -149,8 +192,12 @@ export class MarketChartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchData(); // Charger les données initiales
     this.subscription = interval(5000).subscribe(() => this.fetchData());
+    setInterval(() => {
+      this.loadIndicators();
+    }, 2000);
     this.loadOrderBook();
     this.startPolling();
+    this.simulatePredictionLoading();
      // Récupérer les données toutes les 10 secondes
      this.loadPositions(this.selectedSymbol);
     this.startUpdatingPosition(); // Démarrer la mise à jour des positions
@@ -166,6 +213,32 @@ export class MarketChartComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
       clearInterval(this.intervalId);
     }
+  }
+  simulatePredictionLoading(): void {
+    this.prediction = null; // Réinitialise la prédiction
+    this.error = null; // Réinitialise les erreurs
+    this.loadingProgress = 0; // Réinitialise la barre de progression
+
+    const interval = setInterval(() => {
+      if (this.loadingProgress < 100) {
+        this.loadingProgress += 10;
+      } else {
+        clearInterval(interval);
+        this.getPrediction(); // Appelle l'API une fois le chargement terminé
+      }
+    }, 500); // Incrémente la barre toutes les 500 ms
+  }
+  getPrediction(): void {
+    this.predictionService.getPrediction().subscribe({
+      next: (data) => {
+        this.prediction = data;
+        this.error = null;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération de la prédiction :', err);
+        this.error = 'Impossible de récupérer la prédiction.';
+      }
+    });
   }
   openPositionForm(action: string): void {
     if (this.isFormVisible && this.positionAction === action) {
@@ -184,20 +257,49 @@ export class MarketChartComponent implements OnInit, OnDestroy {
       // Vous pouvez pré-remplir d'autres champs ici si nécessaire
     }
   }
-
-  loadIndicators() {
+  loadIndicators(): void {
     this.marketDataService.getIndicators(this.selectedSymbol).subscribe(
       (data: Indicator[]) => {
-        console.log(`Requête d'indicateurs pour ${this.selectedSymbol}`);
-
-        console.log('Données brutes reçues :', data);  // Vérifier les données reçues
-        this.indicators = data;
-        console.log('Indicateurs récupérés :', this.indicators);  
+        console.log(`Indicateurs reçus :`, data);
+  
+        // Effacer les anciennes données
+        this.rsiData = [];
+        this.macdData = [];
+  
+        data.forEach((indicator) => {
+          // Assurez-vous que indicator.rsi et indicator.macd sont des tableaux de nombres
+          this.rsiData.push({
+            name: new Date(indicator.timestamp).toLocaleTimeString(),  // Temps basé sur le timestamp
+            value: [indicator.rsi],  // En supposant que rsi est une seule valeur
+          });
+          this.macdData.push({
+            name: new Date(indicator.timestamp).toLocaleTimeString(),  // Temps basé sur le timestamp
+            value: [indicator.macd],  // En supposant que macd est une seule valeur
+          });
+        });
+  
+        // Vérification des données après ajout
+        console.log('RSI Data:', this.rsiData);
+        console.log('MACD Data:', this.macdData);
+  
+        // Limiter à 50 derniers points
+        if (this.rsiData.length > 50) this.rsiData.splice(0, this.rsiData.length - 50);
+        if (this.macdData.length > 50) this.macdData.splice(0, this.macdData.length - 50);
       },
       (error) => {
         console.error('Erreur lors de la récupération des indicateurs', error);
       }
     );
+  }
+  
+  
+  
+
+  formatChartData(data: Indicator[], key: keyof Indicator, label: string): any[] {
+    return data.map((item) => ({
+      name: item.timestamp, // Timestamp comme axe X
+      value: item[key], // RSI ou MACD comme valeur
+    }));
   }
   fetchData() {
   const pricesUrl = `http://localhost:8089/ProjetSalleDeMarche/portfolio/get-prices/${this.selectedSymbol}`;
@@ -256,12 +358,7 @@ generateTradingSignal(indicators: Indicator[]) {
     this.enterPosition();
   }
 
-  // Vérification des signaux MACD (facultatif)
-  if (latestIndicator.macd > latestIndicator.signalLine) {
-    console.log('MACD indique un signal d\'achat.');
-  } else if (latestIndicator.macd < latestIndicator.signalLine) {
-    console.log('MACD indique un signal de vente.');
-  }
+
 
   // Met à jour le signal courant avec le type et le message
   this.currentSignal = { type, message };
@@ -571,7 +668,9 @@ goToOrderBook() {
           profitOrLoss: profitOrLoss
         };
       });
-      // Forcer la mise à jour de la vue
+
+      // Forcer la mise à jour de la vue après modification des positions
+      this.cdr.detectChanges(); // Si vous êtes dans un environnement Angular, utilisez ceci pour forcer la mise à jour
     } else {
       console.error('Impossible de récupérer le prix actuel.');
     }
