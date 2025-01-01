@@ -1,0 +1,22 @@
+<div class="recommendations-container">
+  <h2>Recommandations</h2>
+
+  <!-- Vérification si des recommandations sont disponibles -->
+  <div *ngIf="recommandations.length > 0; else noRecommendations">
+    <ul>
+      <!-- Boucle à travers les recommandations et affichage de chaque élément -->
+      <li *ngFor="let recommandation of recommandations">
+        <div class="recommendation">
+          <h3>{{ recommandation.formation }}</h3>
+          <p>{{ recommandation.evenement }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Message affiché si aucune recommandation n'est disponible -->
+  <ng-template #noRecommendations>
+    <p *ngIf="!errorMessage">Aucune recommandation disponible pour le moment.</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </ng-template>
+</div>

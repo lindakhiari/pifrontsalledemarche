@@ -1,0 +1,104 @@
+/* Conteneur principal */
+.container {
+  background: linear-gradient(135deg, #0a0a23, #2f2f54); /* Dégradé bleu foncé */
+  color: #ffffff; /* Texte en blanc pour le conteneur */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 139, 0.1); /* Ombre légère en bleu */
+}
+
+/* Titre principal */
+h2 {
+  color: #FFD700; /* Couleur dorée pour le titre */
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Tableau avec bordures et couleurs */
+.table {
+  width: 100%;
+  border: 1px solid #0a0a23; /* Remplacé le gris par bleu foncé */
+  border-collapse: collapse;
+  color: #ffffff; /* Texte en blanc dans le tableau */
+}
+
+th {
+  background-color: #0a0a23; /* Bleu foncé pour les en-têtes */
+  color: #FFD700; /* Couleur dorée pour les titres de colonnes */
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  background-color: #07204a; /* Bleu foncé pour les cellules */
+  color: #ffffff; /* Texte blanc pour les cellules */
+  text-align: left;
+  padding: 10px;
+}
+
+tbody tr {
+  background-color: #07204a; /* Bleu foncé pour toutes les lignes */
+}
+
+tbody tr:hover {
+  background-color: #0a0a23; /* Changement de couleur au survol */
+}
+
+/* Boutons */
+.btn {
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 8px 15px;
+  text-align: center;
+  color: #2424b7; /* Bleu foncé pour le texte des boutons */
+  background-color: #FFD700; /* Fond doré */
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+/* Effet de survol des boutons */
+.btn:hover {
+  background-color: #ffcc00; /* Doré plus clair au survol */
+  color: #080808; /* Texte légèrement plus sombre */
+  cursor: pointer;
+}
+
+/* Styles spécifiques pour les messages de succès et d'erreur */
+.alert-success {
+  background-color: #28a745; /* Vert pour les succès */
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: #dc3545; /* Rouge pour les erreurs */
+  color: #fff;
+}
+
+/* Styles des alertes */
+.alert {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+/* Message de succès en doré */
+.alert-success-gold {
+  background-color: #FFD700; /* Fond doré */
+  color: #080808; /* Texte noir pour un bon contraste */
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* Message d'erreur (rouge) */
+.alert-danger {
+  background-color: #FFD700; /* Fond rouge pour l'erreur */
+  color: #ffffff; /* Texte blanc */
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+}

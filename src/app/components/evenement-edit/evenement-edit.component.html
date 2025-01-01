@@ -1,0 +1,39 @@
+<div class="container bg-dark-blue text-white p-4 rounded">
+  <h2 class="mt-4 text-gold">Modifier l'Événement</h2>
+  <form (ngSubmit)="updateEvenement()">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      <input type="text" id="nom" [(ngModel)]="evenement.nomEvenement" name="nomEvenement" class="form-control bg-light-blue text-white" required />
+    </div>
+
+    <!-- Champ pour la date de début -->
+    <div class="mb-3">
+      <label for="dateDebut" class="form-label">Date de Début</label>
+      <input type="date" id="dateDebut" [(ngModel)]="evenement.dateDebut" name="dateDebut" class="form-control bg-light-blue text-white" required />
+    </div>
+
+    <!-- Champ pour la date de fin -->
+    <div class="mb-3">
+      <label for="dateFin" class="form-label">Date de Fin</label>
+      <input type="date" id="dateFin" [(ngModel)]="evenement.dateFin" name="dateFin" class="form-control bg-light-blue text-white" required />
+    </div>
+
+    <!-- Champ pour la description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" [(ngModel)]="evenement.description" name="description" class="form-control bg-light-blue text-white" required></textarea>
+    </div>
+
+    <!-- Champ pour le prix -->
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix</label>
+      <input type="number" id="prix" [(ngModel)]="evenement.prix" name="prix" class="form-control bg-light-blue text-white" required />
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-gold">Mettre à jour</button>
+      <a [routerLink]="['/evenements']" class="btn btn-gold">Annuler</a>
+      <a [routerLink]="['/evenements']" class="btn btn-gold">Retour à la liste des événements</a>
+    </div>
+  </form>
+</div>

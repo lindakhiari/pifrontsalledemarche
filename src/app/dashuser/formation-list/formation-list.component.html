@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2 class="mt-4 text-light">Liste des Formations</h2>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Date de Création</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let formation of formations">
+        <td>{{ formation.titre }}</td>
+        <td>{{ formation.description }}</td>
+        <td>{{ formation.dateCreation | date:'shortDate' }}</td>
+        <td>{{ formation.prix || 'Non défini' }}</td>
+        <td>
+          <button class="btn btn-gold" (click)="inscrire(formation.id)">S'inscrire</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="message">
+    <p [ngClass]="{ 'success-message': isSuccess, 'error-message': !isSuccess }">
+      {{ message }}
+    </p>
+  </div>
+
+  <button class="btn btn-gold mt-3" (click)="goBack()">Retour à la page d'accueil</button>
+</div>

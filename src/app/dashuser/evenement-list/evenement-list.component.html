@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2 class="mt-4 text-light">Liste des Événements</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Date de Début</th>
+        <th>Date de Fin</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evenement of evenements">
+        <td>{{ evenement.nomEvenement || 'Nom non disponible' }}</td>
+        <td>{{ evenement.dateDebut | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ evenement.dateFin | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ evenement.description || 'Aucune description disponible' }}</td>
+        <td>{{ evenement.prix ? '$' + evenement.prix : 'Prix non disponible' }}</td>
+        <td>
+          <button class="btn btn-gold" (click)="inscrire(evenement.idEvenement)">S'inscrire</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Affichage du message de succès ou d'erreur -->
+  <div *ngIf="message" class="alert" [ngClass]="isSuccess ? 'alert-success-gold' : 'alert-danger'" [innerHTML]="message"></div>
+
+  <!-- Bouton pour revenir à la page d'accueil -->
+  <button class="btn btn-gold mt-3" (click)="goBack()">Retour à la page d'accueil</button>
+</div>

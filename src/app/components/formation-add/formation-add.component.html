@@ -1,0 +1,34 @@
+<div class="container bg-dark-blue text-white p-4 rounded">
+  <h2 class="mt-4 text-gold">Ajouter une Formation</h2>
+  <form (ngSubmit)="addFormation()">
+    <!-- Titre -->
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input type="text" id="titre" [(ngModel)]="formation.titre" name="titre" class="form-control bg-light-blue text-white" required>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" [(ngModel)]="formation.description" name="description" class="form-control bg-light-blue text-white" required></textarea>
+    </div>
+
+    <!-- Prix -->
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix</label>
+      <input type="number" id="prix" [(ngModel)]="formation.prix" name="prix" class="form-control bg-light-blue text-white" step="0.01" min="0">
+    </div>
+
+    <!-- Date de création -->
+    <div class="mb-3">
+      <label for="dateCreation" class="form-label">Date de Création</label>
+      <input type="date" id="dateCreation" [(ngModel)]="formation.dateCreation" name="dateCreation" class="form-control bg-light-blue text-white" required>
+    </div>
+
+    <!-- Boutons -->
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-gold">Ajouter</button>
+      <a [routerLink]="['/formations']" class="btn btn-gold">Annuler</a>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="text-light">Formation en Trading</h1>
+  <div>
+    <label for="drawdown" class="form-label">Entrez la perte maximale (en euros) :</label>
+    <input type="number" id="drawdown" class="form-control" [(ngModel)]="drawdown" placeholder="Par exemple, 500" (keydown.enter)="setDrawdown()">
+    <button class="btn btn-gold mt-3" (click)="setDrawdown()">Définir la perte maximale</button>
+  </div>
+
+  <div *ngIf="drawdown > 0">
+    <div class="ticker-display" id="tickerDisplay">Actif : {{ currentTicker }}</div>
+    <div class="situation-display" id="situationDisplay">Situation : {{ currentSituation }} (Risque : {{ currentRisk }} points)</div>
+
+    <div>
+      <label for="priceStep" class="form-label">Choisissez la taille du pas de prix :</label>
+      <div id="priceStepButtons">
+        <button *ngFor="let step of [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1]" class="btn btn-secondary price-step-btn" (click)="checkPriceStep(step)">
+          {{ step }} €
+        </button>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input type="number" id="positionSize" class="form-control" [(ngModel)]="positionSizeInput" placeholder="Entrez la taille de la position" (keydown.enter)="checkPosition()">
+      <button class="btn btn-gold" (click)="checkPosition()">Envoyer</button>
+    </div>
+
+    <div id="feedback" class="feedback" [ngClass]="{'correct': feedback === 'Taille de position correcte !', 'incorrect': feedback !== 'Taille de position correcte !'}">
+      {{ feedback }}
+    </div>
+  </div>
+  <button class="btn mt-3" [routerLink]="['/market-chart']" style="background-color: #FFD700; border-color: #FFD700; color: white; border-radius: 5px;">Retour </button>
+
+
+</div>

@@ -1,0 +1,79 @@
+<div class="auth-main">
+  <div class="auth-wrapper">
+    <h3 class="mb-4 text-white"><b>Sign Up</b></h3>
+    <form (ngSubmit)="register()" class="register-form">
+      <!-- First Name -->
+      <div class="mb-3">
+        <label class="form-label" for="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          [(ngModel)]="firstName"
+          name="firstName"
+          required
+          class="form-control"
+          placeholder="Enter your first name"
+        />
+      </div>
+
+      <!-- Last Name -->
+      <div class="mb-3">
+        <label class="form-label" for="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          [(ngModel)]="lastName"
+          name="lastName"
+          required
+          class="form-control"
+          placeholder="Enter your last name"
+        />
+      </div>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label class="form-label" for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="username"
+          name="username"
+          required
+          class="form-control"
+          placeholder="Choose a username"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label" for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          class="form-control"
+          placeholder="Enter your email address"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          class="form-control"
+          placeholder="Create a password"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+</div>

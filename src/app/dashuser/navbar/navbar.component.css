@@ -1,0 +1,60 @@
+/* Fond bleu foncé pour la navbar */
+.bg-dark-blue {
+  background-color: #0a0a23; /* Bleu foncé */
+}
+
+/* Couleur du texte doré */
+.text-gold {
+  color: #FFD700; /* Doré */
+}
+
+/* Boutons dorés */
+.btn-gold {
+  background-color: #FFD700; /* Doré */
+  color: #0a0a23; /* Bleu foncé pour le texte */
+  border: none;
+  padding: 8px 16px; /* Un peu d'espace autour du texte */
+  border-radius: 4px;
+}
+
+/* Bouton doré au survol */
+.btn-gold:hover {
+  background-color: #e6c200; /* Doré plus foncé au survol */
+}
+
+/* Liens dorés dans la navbar */
+.nav-link.text-gold {
+  color: #FFD700; /* Liens dorés */
+}
+
+/* Modifie la couleur des liens actifs pour qu'ils restent dorés */
+.nav-link.active {
+  color: #FFD700 !important; /* Doré pour les liens actifs */
+}
+
+/* Couleur du fond au survol d'un lien */
+.nav-link:hover {
+  background-color: #e6c200; /* Doré plus foncé */
+}
+
+/* Icône du toggle dorée */
+.navbar-toggler-icon {
+  background-color: #FFD700;
+}
+nav {
+  transition: transform 0.3s ease-in-out;
+}
+
+nav[ngIf="false"] {
+  transform: translateY(-100%);
+}
+/* Masquer la navbar avec une transition fluide */
+nav.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Si vous voulez que la navbar soit toujours en haut quand elle est visible */
+nav {
+  transition: transform 0.3s ease-in-out;
+}

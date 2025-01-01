@@ -1,0 +1,112 @@
+/* Fond bleu très foncé avec dégradé dynamique pour la barre de navigation */
+.navbar-wrapper {
+    background: linear-gradient(135deg, #0a0a23, #2f2f54); /* Dégradé dynamique */
+    color: #ffffff;
+    border-bottom: 2px solid #1a1a40;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Ombre plus marquée */
+    padding: 10px 0; /* Plus d'espace autour */
+  }
+  
+  /* Logo dans la barre de navigation */
+  .m-header img {
+    width: 160px;
+    height: auto;
+    filter: brightness(0.7) contrast(1.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .m-header img:hover {
+    transform: scale(1.05); /* Effet au survol */
+    filter: brightness(1) contrast(1.8); /* Augmentation de la brillance */
+  }
+  
+  /* Groupement des boutons de navigation */
+  .nav-group {
+    text-align: center;
+    background-color: #121212; /* Fond sombre pour contraste */
+    padding: 30px 10px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5); /* Ombre dorée */
+    margin-top: 30px;
+  }
+  
+  /* Style des boutons avec effet néon */
+  .nav-item {
+    display: inline-block;
+    text-align: center;
+    padding: 18px 30px;
+    margin: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background: #0a0a23; /* Fond bleu très foncé */
+    border: 2px solid #FFD700; /* Bordure dorée */
+    border-radius: 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+  
+  /* Animation de survol avec effet lumineux */
+  .nav-item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg, #FFD700, #ff6347, #00bfff, #b8860b); /* Dégradé lumineux */
+    transition: all 0.5s;
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0); /* Initialement invisible */
+  }
+  
+  /* Effet de survol des boutons - doré et lumineux */
+  .nav-item:hover {
+    color: #0a0a23; /* Texte sombre au survol */
+    background: #fff; /* Fond blanc au survol */
+    transform: scale(1.1); /* Agrandissement */
+    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6); /* Ombre dorée lumineuse */
+  }
+  
+  /* Effet du cercle lumineux au survol */
+  .nav-item:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Animation du cercle lumineux */
+  }
+  
+  /* Effet lors du clic (pression) */
+  .nav-item:active {
+    transform: scale(0.98); /* Réduction */
+    box-shadow: 0px 0px 12px rgba(255, 215, 0, 0.4); /* Ombre dorée plus légère */
+  }
+  
+  /* Police claire pour le mode sombre */
+  body {
+    background-color: #0a0a23; /* Fond bleu très foncé global */
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Transition fluide pour le mode sombre et les éléments */
+  body, .nav-group, .nav-item {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Ajout d'une animation d'apparition pour les éléments */
+  .nav-group, .nav-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

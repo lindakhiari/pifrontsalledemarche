@@ -1,0 +1,32 @@
+<div class="container">
+    <h2 class="mt-4">Liste des Formations</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de Création</th>
+                <th>Prix</th> <!-- Nouvelle colonne pour le prix -->
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let formation of formations">
+                <td>{{ formation.titre }}</td>
+                <td>{{ formation.description }}</td>
+                <td>{{ formation.dateCreation | date:'dd/MM/yyyy' }}</td>
+                <td>{{ formation.prix | currency:'EUR' }}</td> <!-- Affichage du prix -->
+                <td>
+                    <!-- Bouton Supprimer -->
+                    <button class="btn btn-gris-supprimer" (click)="deleteFormation(formation.id)">Supprimer</button>
+                    
+                    <!-- Bouton Modifier -->
+                    <a [routerLink]="['/formations/edit', formation.id]" class="btn btn-gris-modifier">Modifier</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a [routerLink]="['/Formation']" class="btn btn-gris-modifier">Ajouter Une Formation</a>
+
+    <a [routerLink]="['/dashboard/default']" class="btn btn-gris">Retour à l'accueil</a>
+</div>
