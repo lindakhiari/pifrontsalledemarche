@@ -1,0 +1,151 @@
+<div class="container py-4">
+  <h1 class="text-center mb-4">Gestion des Actifs Financiers</h1>
+
+  <!-- Actif Management Form -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="h5 mb-0">{{ editMode ? 'Modifier Actif' : 'Ajouter Actif' }}</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="actifForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="nomActif" class="form-label">Nom de l'actif</label>
+          <input
+            id="nomActif"
+            formControlName="nomActif"
+            type="text"
+            class="form-control"
+            placeholder="Entrez le nom de l'actif"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="valeurActuelle" class="form-label">Valeur Actuelle</label>
+          <input
+            id="valeurActuelle"
+            formControlName="valeurActuelle"
+            type="number"
+            class="form-control"
+            placeholder="Entrez la valeur actuelle"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="typeActif" class="form-label">Type d'Actif</label>
+          <select id="typeActif" formControlName="typeActif" class="form-select">
+            <option value="ACTION">Action</option>
+            <option value="OBLIGATION">Obligation</option>
+            <option value="CRYPTO_MONNAIE">Crypto-Monnaie</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="marche" class="form-label">Marché</label>
+          <input
+            id="marche"
+            formControlName="marche"
+            type="text"
+            class="form-control"
+            placeholder="Entrez le marché"
+          />
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" [disabled]="actifForm.invalid">
+            {{ editMode ? 'Mettre à Jour' : 'Ajouter' }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="resetForm()"
+            *ngIf="editMode"
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Historical Data Form -->
+  <div *ngIf="currentActifId !== null" class="card mb-4">
+    <div class="card-header bg-secondary text-white">
+      <h2 class="h5 mb-0">Ajouter des Données Historiques</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="historiqueForm" (ngSubmit)="onHistoriqueSubmit()">
+        <div class="mb-3">
+          <label for="periode" class="form-label">Période</label>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Choisissez une période</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              id="periode"
+              formControlName="periode"
+              placeholder="Sélectionnez une date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        
+        <div class="mb-3">
+          <label for="valeur" class="form-label">Valeur</label>
+          <input
+            id="valeur"
+            formControlName="valeur"
+            type="number"
+            class="form-control"
+            placeholder="Entrez la valeur"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="historiqueForm.invalid">
+          Ajouter Historique
+        </button>
+      </form>
+
+      <h3 class="mt-4">Historique de l'Actif</h3>
+      <ul class="list-group">
+        <li *ngFor="let item of currentActifHistorique" class="list-group-item">
+          {{ item.periode }}: {{ item.valeur }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Actifs Table -->
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h2 class="h5 mb-0">Liste des Actifs</h2>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-striped table-hover mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>Nom</th>
+            <th>Valeur Actuelle</th>
+            <th>Type</th>
+            <th>Marché</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actif of actifs">
+            <td>{{ actif.nomActif }}</td>
+            <td>{{ actif.valeurActuelle }}</td>
+            <td>{{ actif.typeActif }}</td>
+            <td>{{ actif.marche }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="onEdit(actif)">
+                Modifier
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="onDelete(actif.idActifFinancier)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
