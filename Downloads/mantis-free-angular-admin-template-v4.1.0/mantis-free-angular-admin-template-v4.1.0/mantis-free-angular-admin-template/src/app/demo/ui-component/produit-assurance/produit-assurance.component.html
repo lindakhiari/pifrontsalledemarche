@@ -1,0 +1,82 @@
+<div class="container">
+  <h2>Gestion des Produits d'Assurance</h2>
+
+  <!-- Formulaire pour générer un produit d'assurance -->
+  <form [formGroup]="generateForm" class="mt-4" (ngSubmit)="generateProduitAssurance()">
+    <div class="form-group">
+      <label for="nomActif">Nom de l'Actif</label>
+      <input id="nomActif" type="text" class="form-control" formControlName="nomActif" placeholder="Entrez le nom de l'actif" />
+    </div>
+
+    <div class="form-group">
+      <label for="dateCalcul">Date de Calcul</label>
+      <input id="dateCalcul" type="date" class="form-control" formControlName="dateCalcul" />
+    </div>
+
+    <div class="form-group">
+      <label for="typeAssurance">Type d'Assurance</label>
+      <select id="typeAssurance" class="form-control" formControlName="typeAssurance">
+        <option value="" disabled>Sélectionnez un type</option>
+        <option value="CRYPTO">CRYPTO</option>
+        <option value="OBLIGATION">OBLIGATION</option>
+        <option value="FOREX">FOREX</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="idProfil">ID du Profil</label>
+      <input id="idProfil" type="number" class="form-control" formControlName="idProfil" placeholder="Entrez l'ID du profil" />
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="generateForm.invalid">Générer Produit</button>
+  </form>
+
+  <!-- Affichage des résultats -->
+  <div *ngIf="primeResult || coverageResult" class="mt-4">
+    <p *ngIf="primeResult">Prime calculée : {{ primeResult | currency: 'EUR' }}</p>
+    <p *ngIf="coverageResult">Couverture calculée : {{ coverageResult | currency: 'EUR' }}</p>
+  </div>
+
+  <!-- Formulaire pour calculer le ratio Sinistre/Prime clos -->
+  <form [formGroup]="ratioForm" class="mt-4" (ngSubmit)="calculateSinistrePrimeRatioForClos()">
+    <div class="form-group">
+      <label for="nomProduit">Nom du Produit</label>
+      <input id="nomProduit" type="text" class="form-control" formControlName="nomProduit" placeholder="Entrez le nom du produit" />
+    </div>
+    <button class="btn btn-primary" type="submit">Calculer Ratio Sinistre/Prime Clos</button>
+  </form>
+
+  <div class="mt-4" *ngIf="ratioResult">
+    <p>Résultat du Ratio : {{ ratioResult.ratioSinistrePrimeClos }}</p>
+  </div>
+
+  <!-- Liste des produits d'assurance -->
+  <div class="mt-5">
+    <h4>Liste des Produits d'Assurance</h4>
+    <table class="table table-bordered table-hover mt-3">
+      <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Nom Produit</th>
+          <th>Prime</th>
+          <th>Couverture</th>
+          <th>Type_Assurance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of produitsAssurance">
+          <td>{{ produit.idProduit }}</td>
+          <td>{{ produit.nomProduit }}</td>
+          <td>{{ produit.prime | currency: 'EUR' }}</td>
+          <td>{{ produit.couverture | currency: 'EUR' }}</td>
+          <td>{{ produit.atype }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editProduit(produit.idProduit)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteProduit(produit.idProduit)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
