@@ -1,0 +1,107 @@
+/* Style des éléments de navigation */
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff; /* Texte blanc pour les éléments */
+    background: #0a0a23; /* Fond bleu foncé */
+    border: 2px solid #FFD700; /* Bordure dorée */
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Icône et texte dans les éléments de navigation */
+  .nav-icon {
+    margin-right: 8px;
+  }
+  
+  .nav-text {
+    font-weight: 600;
+  }
+  
+  /* Effet de survol avec un fond clair et une animation douce */
+  .nav-item:hover {
+    background: #ffffff; /* Fond blanc au survol */
+    color: #e3e3eb; /* Texte sombre au survol */
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5); /* Ombre dorée douce */
+    transform: translateX(5px); /* Déplacement latéral léger */
+  }
+  /* Style des éléments de navigation */
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff; /* Texte blanc pour les éléments */
+    background: #0a0a23; /* Fond bleu foncé */
+    border: 2px solid #FFD700; /* Bordure dorée */
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Icône et texte dans les éléments de navigation */
+  .nav-icon {
+    margin-right: 8px;
+  }
+  
+  .nav-text {
+    font-weight: 600;
+  }
+  
+  /* Effet de survol avec un fond clair et une animation douce */
+  .nav-item:hover {
+    background: #ffffff; /* Fond blanc au survol */
+    color: #ffffff; /* Texte reste blanc au survol */
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5); /* Ombre dorée douce */
+    transform: translateX(5px); /* Déplacement latéral léger */
+  }
+  
+  /* Animation du cercle lumineux au survol */
+  .nav-item:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: rgba(179, 179, 18, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Style pour les éléments de navigation actifs */
+  .nav-item.active {
+    background: #ecebe9; /* Fond clair pour l'élément actif */
+    color: #ffffff; /* Texte reste blanc pour l'élément actif */
+  }
+  
+  /* Animation du cercle lumineux au survol */
+  .nav-item:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: rgba(179, 179, 18, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Style pour les éléments de navigation actifs */
+  .nav-item.active {
+    background: #ecebe9; /* Fond doré pour l'élément actif */
+    color: #0a0a23; /* Texte sombre pour l'élément actif */
+  }
+  

@@ -1,0 +1,65 @@
+/* Conteneur principal */
+.container {
+  background: linear-gradient(135deg, #0a0a23, #2f2f54); /* Dégradé bleu foncé */
+  color: #ffffff; /* Texte en blanc */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Titre principal */
+h2 {
+  color: #FFD700; /* Couleur dorée */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Tableau avec bordures et couleurs */
+.table {
+  width: 100%;
+  border: 1px solid #444;
+  border-collapse: collapse;
+  color: #ffffff; /* Texte en blanc */
+}
+
+th {
+  background-color: #0a0a23; /* Bleu foncé pour les en-têtes */
+  color: #FFD700; /* Texte doré */
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  color: #ffffff; /* Texte blanc */
+  text-align: left;
+  padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #121212; /* Gris foncé pour les lignes paires */
+}
+
+tbody tr:hover {
+  background-color: #333; /* Gris encore plus foncé au survol */
+}
+
+/* Boutons stylisés */
+.btn {
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 8px 15px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Bouton en jaune */
+.btn-gold {
+  background-color: #FFD700; /* Jaune */
+  color: #0a0a23; /* Texte bleu foncé */
+  border: none;
+}
+
+.btn-gold:hover {
+  background-color: #ffcc00; /* Jaune clair au survol */
+  color: #121212; /* Texte légèrement plus sombre */
+  cursor: pointer;
+}

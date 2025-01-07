@@ -1,0 +1,106 @@
+/* Barre de navigation avec dégradé dynamique et style moderne */
+.navbar-wrapper {
+  background: linear-gradient(135deg, #1c1c3c, #2f2f54); /* Dégradé plus subtil */
+  color: #ffffff;
+  border-bottom: 2px solid #1a1a40;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 15px 0;
+  border-radius: 8px;
+}
+
+/* Logo dans la barre de navigation */
+.m-header img {
+  width: 160px;
+  height: auto;
+  filter: brightness(0.8) contrast(1.3);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.m-header img:hover {
+  transform: scale(1.1);
+  filter: brightness(1) contrast(1.5);
+}
+
+/* Style des éléments de navigation */
+.nav-item {
+  display: inline-block;
+  text-align: center;
+  padding: 16px 28px;
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2a2a5e; /* Fond bleu foncé */
+  border: 2px solid #FFD700; /* Bordure dorée */
+  border-radius: 10px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* Animation lumineuse au survol */
+.nav-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(45deg, #FFD700, #ff6347, #00bfff, #b8860b);
+  transition: all 0.5s ease-in-out;
+  border-radius: 50%;
+  z-index: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.nav-item:hover {
+  color: #1c1c3c; /* Texte sombre au survol */
+  background: #ffffff; /* Fond blanc au survol */
+  transform: scale(1.1);
+  box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6); /* Effet lumineux */
+}
+
+.nav-item:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Effet lors du clic */
+.nav-item:active {
+  transform: scale(0.98);
+  box-shadow: 0px 0px 12px rgba(255, 215, 0, 0.4);
+}
+
+/* Groupement des boutons de navigation */
+.nav-group {
+  text-align: center;
+  background: linear-gradient(145deg, #292945, #1c1c3c); /* Dégradé harmonieux */
+  padding: 25px 15px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4); /* Ombre plus douce */
+  margin-top: 20px;
+}
+
+/* Animation d'apparition fluide */
+.nav-group, .nav-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Police et fond global */
+body {
+  background-color: #1a1a30; /* Fond sombre harmonieux */
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  transition: all 0.3s ease-in-out;
+}

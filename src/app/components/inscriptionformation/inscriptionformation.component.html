@@ -1,0 +1,18 @@
+<div>
+  <h2>Inscription à une Formation</h2>
+
+  <label for="idUtilisateur">ID Utilisateur:</label>
+  <input type="number" id="idUtilisateur" [(ngModel)]="idUtilisateur" disabled> <!-- L'ID de l'utilisateur est affiché mais non modifiable -->
+
+  <label for="idFormation">ID Formation:</label>
+  <input type="number" id="idFormation" [(ngModel)]="idFormation" disabled> <!-- L'ID de la formation est récupéré depuis l'URL -->
+
+  <button (click)="inscrire()">S'inscrire</button>
+
+  <!-- Message affiché dynamiquement -->
+  <p *ngIf="message" [ngClass]="{ 'success-message': isSuccess, 'error-message': !isSuccess }">
+    {{ message }}
+  </p>
+  <button (click)="goBack()">Retour à la liste des formations</button>
+
+</div>

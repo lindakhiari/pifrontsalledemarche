@@ -1,0 +1,109 @@
+/* Fond bleu très foncé pour l'arrière-plan global */
+body {
+  background-color: #0a0a23; /* Bleu très foncé */
+  color: #ffffff; /* Texte en couleur claire */
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+/* Section contenant les graphiques */
+.row {
+  margin-top: 30px;
+}
+
+/* Graphique Sentiment */
+.app-sentiment-chart {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(to right, #b8860b, #ffd700, #ffcc00); /* Dégradé doré */
+  border-radius: 8px;
+  border: 4px solid #0a0a23; /* Bordure bleu foncé autour du graphique */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Ombre douce */
+}
+
+/* Titre du graphique Sentiment */
+h3 {
+  color: #FFD700; /* Couleur dorée pour les titres */
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center; /* Centrer le titre */
+  margin-bottom: 20px; /* Espace sous le titre */
+}
+
+
+/* Colonne contenant le graphique Sentiment (20% largeur sur écrans moyens et plus grands) */
+.col-12.col-md-3 {
+  background-color: #1a1a40; /* Fond bleu foncé pour contraster avec les graphiques */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Colonne contenant le graphique Recommendation (80% largeur) */
+.col-12.col-md-8.offset-md-1 {
+  background-color: #1a1a40; /* Fond bleu foncé */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Titre des graphiques */
+h3 {
+  color: #FFD700; /* Couleur dorée pour les titres */
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* Espacement entre les éléments */
+.mb-4 {
+  margin-bottom: 20px; /* Espacement standard entre les éléments */
+}
+
+/* Adaptation de l'espacement dans la disposition des colonnes */
+.col-12.col-md-2.mb-4 {
+  margin-bottom: 40px; /* Espace supplémentaire sous le graphique Sentiment */
+}
+
+.col-12.col-md-10.mb-4 {
+  margin-top: 40px; /* Espace supplémentaire au-dessus du graphique Recommendation */
+}
+
+/* Ajustement de l'espace entre les colonnes */
+.col-12.col-md-2,
+.col-12.col-md-10 {
+  margin-left: 2px; /* Ajuster l'espace sur la gauche des colonnes */
+}
+
+/* Transition fluide pour les éléments */
+body, .row, .app-analytics-chart, .col-12 {
+  transition: all 0.3s ease-in-out;
+}
+/* Graphique analytique (avec bordure autour de la courbe) */
+.app-analytics-chart {
+  width: 100%;
+  height: 500px; /* Ajustez la hauteur du graphique si nécessaire */
+  background-color: #1a1a40; /* Fond bleu foncé pour le graphique */
+  border-radius: 8px; /* Coins arrondis */
+  border: 4px solid #0a0a23; /* Bordure bleu foncé autour du graphique */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Ombre douce */
+}
+
+/* Graphique Sentiment */
+.app-sentiment-chart {
+  width: 100%;
+  height: 400px;
+  background-color: #1a1a40; /* Fond bleu foncé */
+  border-radius: 8px;
+  border: 4px solid #0a0a23; /* Bordure bleu foncé */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Ombre douce */
+}
+
+/* Graphique Recommendation */
+.app-recommendation-chart {
+  width: 100%;
+  height: 400px;
+  background-color: #1a1a40; /* Fond bleu foncé */
+  border-radius: 8px;
+  border: 4px solid #0a0a23; /* Bordure bleu foncé */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Ombre douce */
+}

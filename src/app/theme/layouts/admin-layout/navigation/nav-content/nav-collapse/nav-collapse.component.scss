@@ -1,0 +1,118 @@
+/* Style principal pour les éléments de navigation */
+.nav-item {
+    position: relative;
+    display: block;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background: #1c1c2b; /* Fond sombre élégant */
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  /* Icône de l'élément de navigation */
+  .coded-micon {
+    margin-right: 12px;
+    color: #FFD700; /* Icône dorée */
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Texte de l'élément de navigation */
+  .coded-mtext {
+    color: #ffffff;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Effet de survol */
+  .nav-item:hover {
+    background: #FFD700; /* Fond doré au survol */
+    color: #1c1c2b; /* Texte sombre au survol */
+  }
+  
+  .nav-item:hover .coded-micon {
+    color: #1c1c2b; /* Changement de couleur de l'icône au survol */
+  }
+  
+  .nav-item:hover .coded-mtext {
+    color: #1c1c2b; /* Changement de couleur du texte au survol */
+  }
+  
+  /* Sous-menu */
+  .coded-submenu {
+    display: none;
+    padding-left: 20px;
+    margin-top: 5px;
+    list-style: none;
+  }
+  
+  .nav-item:hover .coded-submenu {
+    display: block; /* Affiche le sous-menu au survol */
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  /* Animation du sous-menu */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Style des éléments du sous-menu */
+  .coded-submenu .nav-item {
+    background: #2b2b3d; /* Fond plus clair pour les sous-éléments */
+    padding: 10px 15px;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* Effet de survol des sous-éléments */
+  .coded-submenu .nav-item:hover {
+    background: #FFD700;
+    color: #1c1c2b;
+  }
+  
+  /* Style de l'élément actif */
+  .nav-item.active {
+    background: #FFD700; /* Fond doré pour l'élément actif */
+    color: #1c1c2b; /* Texte sombre pour l'élément actif */
+  }
+  
+  .nav-item.active .coded-micon,
+  .nav-item.active .coded-mtext {
+    color: #1c1c2b; /* Changement de couleur pour les icônes et le texte actifs */
+  }
+  
+  /* Style pour les éléments qui ont un sous-menu */
+  .coded-hasmenu {
+    position: relative;
+  }
+  
+  /* Effet de flèche pour les sous-menus */
+  .coded-hasmenu::after {
+    content: '▼';
+    font-size: 12px;
+    color: #FFD700;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Rotation de la flèche lorsque le sous-menu est visible */
+  .coded-hasmenu.open::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  

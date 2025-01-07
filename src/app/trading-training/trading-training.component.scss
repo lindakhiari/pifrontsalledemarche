@@ -1,0 +1,97 @@
+/* Conteneur principal */
+.container {
+  background: linear-gradient(135deg, #0a0a23, #2f2f54); /* Dégradé bleu foncé */
+  color: #ffffff; /* Texte en blanc */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 139, 0.1); /* Ombre légère en bleu */
+}
+
+/* Titre principal */
+h1 {
+  color: #FFD700; /* Doré */
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Formulaire */
+.form-label {
+  color: #FFD700; /* Doré */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Boutons */
+.btn-gold {
+  background-color: #FFD700; /* Fond doré */
+  color: #080808; /* Texte noir */
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 15px;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-gold:hover {
+  background-color: #ffcc00; /* Doré plus clair au survol */
+  color: #080808;
+}
+
+.btn-secondary {
+  background-color: #121212;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #07204a;
+  color: #FFD700;
+}
+
+/* Affichage des informations */
+.ticker-display, .situation-display {
+  color: #FFD700;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Feedback */
+.feedback {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.correct {
+  background-color: #28a745;
+  color: white;
+}
+
+.incorrect {
+  background-color: #dc3545;
+  color: white;
+}
+
+.input-group input {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-group button {
+  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: #FFD700;
+  color: #080808;
+  font-weight: bold;
+  border: none;
+}
+
+.input-group button:hover {
+  background-color: #ffcc00;
+  color: #080808;
+}

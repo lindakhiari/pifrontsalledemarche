@@ -1,0 +1,16 @@
+<div>
+  <h2>Inscription à un Événement</h2>
+  
+  <label for="idUtilisateur">ID Utilisateur:</label>
+  <input type="number" id="idUtilisateur" [(ngModel)]="idUtilisateur">
+  
+  <label for="idEvenement">ID Événement:</label>
+  <input type="number" id="idEvenement" [(ngModel)]="idEvenement">
+  
+  <button (click)="inscrire(idEvenement)">S'inscrire</button>
+
+  <!-- Message affiché dynamiquement -->
+  <p *ngIf="message" [ngClass]="{ 'success-message': isSuccess, 'error-message': !isSuccess }">
+    {{ message }}
+  </p>
+</div>

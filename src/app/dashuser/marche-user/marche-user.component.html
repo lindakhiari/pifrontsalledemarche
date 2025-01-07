@@ -1,0 +1,189 @@
+<div class="container">
+  <app-navbar></app-navbar>
+
+  <!-- Header Section -->
+ 
+
+  <!-- Search Bar -->
+  <div class="d-flex justify-content-start mb-3 mt-4">
+    <div class="me-2 mt-4">
+      <label for="search" class="form-label">Search Enterprises:</label>
+      <input
+        type="text"
+        id="search"
+        class="form-control w-25"
+        placeholder="Search enterprises..."
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+
+  <!-- No Enterprises Message -->
+  <div *ngIf="enterprises.length === 0">
+    No enterprises available.
+  </div>
+
+  <!-- Enterprises Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col" style="color: black;">Name</th>
+          <th scope="col" style="color: black;">Current Value</th>
+          <th scope="col" style="color: black;">Market</th>
+          <th scope="col" style="color: black;">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let enterprise of filteredEnterprises"
+          (click)="selectEnterpriseFromTable(enterprise)"
+        >
+          <td [class.table-active]="enterprise.nomActif === selectedEnterprise.nomActif">
+            {{ enterprise.nomActif }}
+          </td>
+          <td>{{ enterprise.valeurActuelle | currency }}</td>
+          <td>{{ enterprise.marche }}</td>
+          <td>{{ enterprise.typeActif }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Invest Button -->
+  <button class="btn btn-primary mt-3" (click)="openInvestmentModal()">Invest</button>
+
+  <!-- Investment Modal -->
+  <div
+    class="modal fade"
+    id="investmentModal"
+    tabindex="-1"
+    aria-labelledby="investmentModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="investmentModalLabel">
+            Invest in {{ selectedEnterprise.nomActif }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="closeInvestmentModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="investmentAmount">Investment Amount ($)</label>
+            <input
+              type="number"
+              id="investmentAmount"
+              class="form-control"
+              [(ngModel)]="investmentAmount"
+              placeholder="Enter amount"
+              min="1"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeInvestmentModal()"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="invest()">
+            Invest
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div id="chart" class="mt-4">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [stroke]="chartOptions.stroke"
+      [dataLabels]="chartOptions.dataLabels"
+      [grid]="chartOptions.grid"
+      [theme]="chartOptions.theme"
+    ></apx-chart>
+  </div>
+
+  <!-- Recommendation Section -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success" (click)="recommendInvestment()">
+      See Investment Recommendation
+    </button>
+    <p class="mt-2">
+      <strong>Recommended Enterprise:</strong> {{ recommendedEnterprise }}
+    </p>
+  </div>
+
+  <!-- Recommendation Modal -->
+  <div
+    class="modal fade"
+    id="recommendationModal"
+    tabindex="-1"
+    aria-labelledby="recommendationModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recommendationModalLabel">
+            Investment Recommendation
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="loading-spinner text-center" *ngIf="isLoading">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Calculating...</span>
+            </div>
+            <p class="mt-2">
+              Analyzing market trends and enterprise performance...
+            </p>
+          </div>
+          <div class="recommendation-stats" *ngIf="!isLoading">
+            <h4 class="text-center text-glow">
+              Recommended Enterprise: {{ recommendedEnterprise }}
+            </h4>
+            <div class="key-metrics">
+              <div><strong>Highest Value:</strong> {{ highestValue | currency }}</div>
+              <div><strong>Lowest Value:</strong> {{ lowestValue | currency }}</div>
+              <div>
+                <strong>Predicted Next Value:</strong> {{ predictedNextValue | currency }}
+              </div>
+              <div><strong>Growth:</strong> {{ growth }}</div>
+              <div><strong>Volatility:</strong> {{ volatility }}</div>
+            </div>
+            <div>
+              <apx-chart
+                [series]="predictionData.series"
+                [chart]="predictionData.chart"
+                [xaxis]="predictionData.xaxis"
+                [yaxis]="predictionData.yaxis"
+                [stroke]="predictionData.stroke"
+                [dataLabels]="predictionData.dataLabels"
+                [grid]="predictionData.grid"
+                [theme]="predictionData.theme"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+/* Fond bleu foncé pour le conteneur principal */
+.container {
+  background: linear-gradient(135deg, #0a0a23, #2f2f54); /* Dégradé bleu foncé */
+  color: #ffffff; /* Texte en blanc pour le conteneur */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Titre en haut */
+h2 {
+  color: #FFD700; /* Couleur dorée pour le titre */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Tableau avec bordures et couleurs */
+.table {
+  width: 100%;
+  border: 1px solid #444;
+  border-collapse: collapse;
+  color: #ffffff; /* Texte en blanc dans le tableau */
+}
+
+th {
+  background-color: #0a0a23; /* Bleu foncé pour les en-têtes */
+  color: #FFD700; /* Couleur dorée pour les titres de colonnes */
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  color: #ffffff; /* Texte blanc pour les cellules */
+  text-align: left;
+  padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #121212; /* Légère variation pour les lignes paires */
+}
+
+tbody tr:hover {
+  background-color: #333; /* Survol des lignes */
+}
+
+/* Boutons alignés et stylisés */
+.btn-container {
+  display: flex;
+  justify-content: center; /* Centrer les boutons */
+  gap: 10px; /* Espacement entre les boutons */
+  margin-top: 20px;
+}
+
+/* Boutons avec fond gris et doré */
+.btn {
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+  color: #FFD700; /* Texte doré */
+  background-color: #6c757d; /* Gris moyen pour le fond */
+  border: 1px solid #FFD700; /* Bordure dorée */
+}
+
+/* Effet de survol */
+.btn:hover {
+  background-color: #5a6268; /* Gris plus foncé au survol */
+  color: #fff; /* Texte blanc au survol */
+  border-color: #ffcc00; /* Bordure dorée lumineuse */
+  cursor: pointer;
+}
+
+/* Styles spécifiques aux boutons */
+.btn-gold {
+  background-color: #FFD700; /* Fond doré */
+  color: #0a0a23; /* Texte bleu foncé */
+  border: none;
+}
+
+.btn-gold:hover {
+  background-color: #ffcc00; /* Doré plus clair au survol */
+  color: #121212; /* Texte légèrement plus sombre */
+}

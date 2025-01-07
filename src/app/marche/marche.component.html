@@ -1,0 +1,85 @@
+
+<div class="container">
+  <!-- Section d'en-tête -->
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h4 class="mb-0">Market Analysis</h4>
+    <button class="btn btn-primary" (click)="refreshData()">Refresh Data</button>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="d-flex justify-content-start mb-3">
+    <div class="me-2">
+      <label for="search" class="form-label">Search Enterprises:</label>
+      <input
+        type="text"
+        id="search"
+        class="form-control w-25"
+        placeholder="Search enterprises..."
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+
+  <!-- Tableau des entreprises -->
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Current Value</th>
+          <th scope="col">Market</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enterprise of filteredEnterprises" (click)="selectEnterprise(enterprise)">
+          <td [class.table-active]="enterprise.nomActif === selectedEnterprise.nomActif">
+            {{ enterprise.nomActif }}
+          </td>
+          <td>{{ enterprise.valeurActuelle | currency }}</td>
+          <td>{{ enterprise.marche }}</td>
+          <td>{{ enterprise.typeActif }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Graphique -->
+  <div class="chart-container mt-4">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [stroke]="chartOptions.stroke"
+      [dataLabels]="chartOptions.dataLabels"
+      [grid]="chartOptions.grid"
+      [theme]="chartOptions.theme"
+    ></apx-chart>
+  </div>
+
+  <!-- Recommandation -->
+  <div class="mt-4">
+    <button class="btn btn-success" (click)="showRecommendation()">See Investment Recommendation</button>
+    <p class="mt-2"><strong>Recommended Enterprise:</strong> {{ recommendedEnterprise }}</p>
+  </div>
+
+  <!-- Modal pour la recommandation -->
+  <div class="modal fade" id="recommendationModal" tabindex="-1" aria-labelledby="recommendationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recommendationModalLabel">Investment Recommendation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Recommended Enterprise:</strong> {{ recommendedEnterprise }}</p>
+          <p>{{ recommendationExplanation }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

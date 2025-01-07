@@ -1,0 +1,36 @@
+/* Fond bleu foncé */
+.bg-dark-blue {
+  background-color: #0a0a23; /* Bleu foncé */
+  border-radius: 10px;
+}
+
+/* Texte doré */
+.text-gold {
+  color: #FFD700; /* Doré */
+}
+
+/* Champs de formulaire avec arrière-plan bleu clair */
+.bg-light-blue {
+  background-color: #2f2f54; /* Bleu clair */
+  border: 1px solid #444; /* Bordure subtile */
+  color: #ffffff; /* Texte blanc */
+}
+
+/* Boutons dorés */
+.btn-gold {
+  background-color: #FFD700; /* Fond doré */
+  color: #0a0a23; /* Texte bleu foncé */
+  border: 1px solid #FFD700; /* Bordure dorée */
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 15px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Effet de survol pour les boutons */
+.btn-gold:hover {
+  background-color: #ffcc00; /* Doré plus clair */
+  color: #121212; /* Texte plus sombre */
+  cursor: pointer;
+}

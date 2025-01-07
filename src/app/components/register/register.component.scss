@@ -1,0 +1,65 @@
+.auth-main {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* Dégradé noir avec opacité */
+    url('/assets/gold-bull-backgrounds-graphics-elements-related-financial-sector.jpg'); /* Image de fond */
+  background-size: cover; /* Assure que l'image couvre toute la taille de l'écran */
+  background-position: center; /* Centre l'image dans la page */
+  background-repeat: no-repeat; /* Évite que l'image se répète */
+  min-height: 100vh; /* Assure que l'arrière-plan couvre toute la hauteur de la page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style pour le formulaire */
+.auth-wrapper {
+  background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+  padding: 40px;
+  border-radius: 12px; /* Coins légèrement arrondis */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Ombrage plus visible */
+  width: 100%; /* Prend toute la largeur disponible */
+  max-width: 400px; /* Largeur maximale de 400px pour un format carré */
+  text-align: center; /* Centrer le contenu */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Champs de formulaire avec transparence */
+.form-control {
+  background: rgba(255, 255, 255, 0.6); /* Fond semi-transparent pour les champs */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Bordure subtile */
+  color: black; /* Texte en noir */
+  border-radius: 6px; /* Coins légèrement arrondis */
+  margin-bottom: 15px; /* Espacement entre les champs */
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff; /* Couleur bleue lors de la mise au focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Effet lumineux */
+}
+
+.btn {
+  background: #000000; /* Boutons noirs */
+  color: white; /* Texte blanc */
+  border: none;
+  width: 100%; /* Bouton prend toute la largeur */
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 6px; /* Coins légèrement arrondis */
+}
+
+.btn:hover {
+  background: #333333; /* Fond légèrement plus clair au survol */
+}
+
+.form-label {
+  color: white; /* Texte des labels en blanc */
+  font-weight: 600; /* Police légèrement plus épaisse */
+}
+
+.auth-footer {
+  color: rgba(255, 255, 255, 0.7); /* Couleur claire pour le footer */
+}

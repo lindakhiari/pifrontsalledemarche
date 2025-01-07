@@ -1,0 +1,21 @@
+<div class="row">
+  <!-- Graphique analytique (en haut sur toute la longueur de la page) -->
+  <div class="col-12 mb-4 text-center">
+    <h3>Welcome To Trader's Edge</h3>
+    <app-analytics-chart></app-analytics-chart>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Graphique Sentiment (20% de la largeur) -->
+  <div class="col-12 col-md-3 mb-4 d-flex flex-column align-items-center">
+    <h3>Avis Utilisateurs </h3>
+    <app-sentiment-chart></app-sentiment-chart>
+  </div>
+
+  <!-- Graphique Recommendation (80% de la largeur) avec un espacement plus large -->
+  <div class="col-12 col-md-8 offset-md-1 mb-4 d-flex flex-column align-items-center">
+    <h3>Recommendation Formations et Evenements </h3>
+    <app-recommendation-chart></app-recommendation-chart>
+  </div>
+</div>
