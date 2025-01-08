@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Modifier le Modèle Actuariel</h2>
+  
+    <form [formGroup]="editForm" class="needs-validation" novalidate>
+      <!-- Nom de l'Actif -->
+      <div class="form-group">
+        <label for="nomActif" class="form-label">Nom de l'Actif</label>
+        <input
+          id="nomActif"
+          type="text"
+          class="form-control"
+          formControlName="nomActif"
+          placeholder="Entrez le nom de l'actif"
+        />
+        <div *ngIf="editForm.get('nomActif')?.invalid && editForm.get('nomActif')?.touched" class="text-danger">
+          Le nom de l'actif est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Date de Calcul -->
+      <div class="form-group">
+        <label for="dateCalcul" class="form-label">Date de Calcul</label>
+        <input
+          id="dateCalcul"
+          type="date"
+          class="form-control"
+          formControlName="dateCalcul"
+        />
+        <div *ngIf="editForm.get('dateCalcul')?.invalid && editForm.get('dateCalcul')?.touched" class="text-danger">
+          La date de calcul est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Valeur Estimée -->
+      <div class="form-group">
+        <label for="valeurEstimee" class="form-label">Valeur Estimée (€)</label>
+        <input
+          id="valeurEstimee"
+          type="number"
+          class="form-control"
+          formControlName="valeurEstimee"
+          placeholder="Entrez la valeur estimée"
+        />
+        <div *ngIf="editForm.get('valeurEstimee')?.invalid && editForm.get('valeurEstimee')?.touched" class="text-danger">
+          La valeur estimée est obligatoire et doit être positive.
+        </div>
+      </div>
+  
+      <!-- Boutons -->
+      <div class="mt-4 text-center">
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          (click)="updateModele()"
+          [disabled]="editForm.invalid"
+        >
+          Modifier le Modèle
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="router.navigate(['/modeles'])">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+  

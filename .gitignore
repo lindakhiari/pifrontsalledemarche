@@ -63,7 +63,7 @@ typings/
 
 # Optional REPL history
 .node_repl_history
-
+.node_modules/
 # Output of 'npm pack'
 *.tgz
 
@@ -104,3 +104,9 @@ dist
 
 # TernJS port file
 .tern-port
+/node_modules
+node_modules/@angular/cdk/schematics/ng-generate/drag-drop/files/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.__style__.template
+node_modules/@angular/cdk/schematics/ng-generate/drag-drop/files/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.html.template
+node_modules/@angular/cdk/schematics/ng-generate/drag-drop/files/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.spec.ts.template
+node_modules/@angular/cdk/schematics/ng-generate/drag-drop/files/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.ts.template
+*.template
