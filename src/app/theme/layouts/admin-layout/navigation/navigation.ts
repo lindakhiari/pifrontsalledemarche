@@ -50,6 +50,14 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/marche',
       },
+      {
+        id: 'typography',
+        title: 'Produit',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/produits',
+      },
+      
       
       {
         id: 'typography',

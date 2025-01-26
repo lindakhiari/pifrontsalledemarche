@@ -44,6 +44,9 @@ interface SeriesData {
   imports: [NgxChartsModule, FormsModule, CommonModule,NavbarComponent]
 })
 export class MarketChartComponent implements OnInit, OnDestroy {
+updateSymbols() {
+throw new Error('Method not implemented.');
+}
   //indicators: Indicator[] = [];
   indicators: string[] = ['RSI', 'MACD'];
   selectedIndicator: string = '';
@@ -64,6 +67,8 @@ export class MarketChartComponent implements OnInit, OnDestroy {
   currentPrice: number = 0;
   entryLine: number | null = null;
   portfolioId:number = 3;
+  filteredSymbols: string[] = [];
+  selectedAssetType: string = 'action';
   // Options pour le graphique
   showXAxis: boolean = true;
   showYAxis: boolean = true;
@@ -79,7 +84,11 @@ export class MarketChartComponent implements OnInit, OnDestroy {
   error: string | null = null;
   isLoading: boolean = true;
 loadingProgress: number = 0;
-predictionData: { confidence: number; decision: string; timestamp: string } | null = null;
+predictionData: { confidence: number; decision: string; timestamp: string } | null = {
+  confidence: 67,
+  decision: 'Acheter',
+  timestamp: new Date().toISOString() // Timestamp par défaut
+};
 predictionChartData: any[] = [];
   stopLoss: number = 0;
   takeProfit: number = 0;
@@ -118,6 +127,7 @@ predictionChartData: any[] = [];
     // Initialiser les prix précédents pour chaque symbole
     this.symbols.forEach(symbol => this.previousPrices[symbol] = null);
   }
+  
 // market-chart.component.ts
 loadBalance(id: number) {
   this.marketDataService.getBalance(id).subscribe(
@@ -129,7 +139,25 @@ loadBalance(id: number) {
     }
   );
 }
+getCircleColor(confidence: number): string {
+  if (confidence >= 70) {
+    return '#4caf50'; // Vert pour confiance élevée (Acheter)
+  } else if (confidence >= 40) {
+    return '#2196f3'; // Bleu pour confiance modérée
+  } else {
+    return '#f44336'; // Rouge pour confiance faible (Vendre)
+  }
+}
 
+onAssetTypeChange(assetType: string) {
+  if (assetType === 'crypto') {
+    this.filteredSymbols = this.symbols.filter(symbol => ['BTC', 'ETH'].includes(symbol));
+  } else if (assetType === 'action') {
+    this.filteredSymbols = this.symbols.filter(symbol => ['AAPL', 'GOOGL'].includes(symbol));
+  } else if (assetType === 'obligation') {
+    this.filteredSymbols = this.symbols.filter(symbol => ['BOND1', 'BOND2'].includes(symbol));
+  }
+}
 setTimeInterval(interval: string) {
   this.selectedInterval = interval;
   this.timeInterval = interval; // Mettre à jour l'intervalle de temps actuel
@@ -258,6 +286,7 @@ formatChartData1(data: any): any[] {
     setInterval(() => {
       this.loadIndicators();
     }, 2000);
+    
     this.loadOrderBook();
     this.startPolling();
     this.simulatePredictionLoading();

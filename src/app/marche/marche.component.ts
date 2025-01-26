@@ -110,29 +110,63 @@ avg : any =0;
       (h) => h.periode && h.valeur && !isNaN(parseFloat(h.valeur))
     );
 
-    if (validData.length === 0) {
-      console.warn("No valid data available for the chart.");
-      this.chartOptions = {
-        series: [],
-        chart: {
-          type: 'line',
-          height: 350
-        },
-        title: {
-          text: 'No Data Available',
-          align: 'center'
-        },
-        xaxis: {
-          categories: [],
-          title: { text: 'Date' }
-        },
-        yaxis: {
-          title: { text: 'Value' }
-        },
-        grid: { show: true }
-      };
-      return;
+ if (validData.length === 0) {
+  console.warn("No valid data available for the chart.");
+  this.chartOptions = {
+    series: [],
+    chart: {
+      type: "line",
+      height: 350,
+      background: "#ffffff" // Fond blanc
+    },
+    title: {
+      text: "Graphique Exemple",
+      align: "center",
+      style: {
+        color: "#000000" // Texte noir
+      }
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+      title: {
+        text: "Mois",
+        style: {
+          color: "#000000" // Texte noir
+        }
+      },
+      labels: {
+        style: {
+          colors: "#000000", // Texte noir
+          fontSize: "12px"
+        }
+      }
+    },
+    yaxis: {
+      title: {
+        text: "Valeur",
+        style: {
+          color: "#000000" // Texte noir
+        }
+      },
+      labels: {
+        style: {
+          colors: "#000000", // Texte noir
+          fontSize: "12px"
+        }
+      }
+    },
+    grid: {
+      borderColor: "#e0e0e0", // Gris clair pour les lignes de grille
+      strokeDashArray: 5 // Lignes pointillées
+    },
+    colors: ["#007bff"], // Couleur des lignes
+    tooltip: {
+      theme: "light" // Thème clair pour les info-bulles
     }
+  };
+  return;
+}
+
 
     const labels = validData.map((h) => new Date(h.periode).toLocaleDateString());
     const data = validData.map((h) => parseFloat(h.valeur));

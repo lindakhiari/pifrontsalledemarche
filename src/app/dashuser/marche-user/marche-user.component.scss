@@ -1,11 +1,11 @@
 body {
-  background-color: #1e272e; /* Fond global légèrement plus sombre */
+  background: linear-gradient(135deg, #10102e, #3a3a6b); /* Fond global légèrement plus sombre */
   color: #ecf0f1; /* Texte clair pour contraste */
   font-family: 'Arial', sans-serif; /* Police lisible et professionnelle */
 }
 
 .container {
-  background-color: #34495e; /* Fond plus neutre pour la section principale */
+  background: linear-gradient(135deg, #10102e, #3a3a6b); /* Fond plus neutre pour la section principale */
   color: #ecf0f1; /* Texte clair */
   padding: 20px;
   border-radius: 10px;
@@ -13,7 +13,7 @@ body {
 }
 
 .table-hover tr:hover {
-  background-color: #3b4a59; /* Survol avec une teinte plus claire */
+  background-color: #070b0e; /* Survol avec une teinte plus claire */
   transition: background-color 0.3s ease;
 }
 
@@ -34,9 +34,9 @@ body {
 #chart {
   margin-top: 20px;
   border-radius: 8px;
-  background-color: #2c3e50; /* Fond sombre pour les graphiques */
+  background-color: #ffffff; /* Fond blanc pour le graphique */
   padding: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Ombre plus subtile */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre subtile */
 }
 
 /* Modal styling */
@@ -48,7 +48,7 @@ body {
 
 .modal-header {
   background-color: #3b4a59; /* Entête légèrement plus clair */
-  color: #ecf0f1; /* Texte clair */
+  color: #331b7c; /* Texte clair */
   font-weight: bold;
   border-radius: 10px 10px 0 0;
 }
@@ -96,9 +96,8 @@ th {
 }
 
 td {
-  color: #bdc3c7;
+  color: #050c10;
 }
-
 
 tbody tr:hover {
   background-color: #3b4a59; /* Survol subtil et moderne */
@@ -117,14 +116,14 @@ input[type="number"] {
   padding: 10px;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid #7f8c8d;
+  border: 1px solid #070d0d;
   margin-top: 10px;
-  background-color: #3b4a59; /* Fond sombre */
-  color: #ecf0f1; /* Texte clair */
+  background-color: #090e13; /* Fond sombre */
+  color: #05090a; /* Texte clair */
 }
 
 button.btn-primary {
-  background-color: #3498db; /* Bleu vif */
+  background-color: #050b0f; /* Bleu vif */
   border-color: #2980b9;
   color: #fff;
   padding: 10px 20px;
@@ -134,13 +133,13 @@ button.btn-primary {
 }
 
 button.btn-primary:hover {
-  background-color: #2980b9; /* Bleu plus sombre au survol */
+  background-color: #080c0f; /* Bleu plus sombre au survol */
   transform: translateY(-2px);
   cursor: pointer;
 }
 
 button.btn-secondary {
-  background-color: #95a5a6; /* Gris neutre */
+  background-color: #0a1415; /* Gris neutre */
   border-color: #7f8c8d;
   color: #fff;
   padding: 10px 20px;
@@ -158,7 +157,7 @@ button.btn-secondary {
   width: 3rem;
   height: 3rem;
   border-width: 0.25rem;
-  color: #3498db; /* Bleu vif pour le spinner */
+  color: #050a0d; /* Bleu vif pour le spinner */
 }
 
 #recommendationModal .modal-dialog {
@@ -186,7 +185,7 @@ button.btn-secondary {
 }
 
 .recommendation-stats div strong {
-  color: #3498db; /* Bleu vif pour les labels */
+  color: #0a0e10; /* Bleu vif pour les labels */
 }
 
 .recommendation-explanation {
@@ -198,7 +197,7 @@ button.btn-secondary {
 
 .recommendation-explanation h5 {
   font-weight: bold;
-  color: #3498db; /* Bleu vif */
+  color: #0a0f13; /* Bleu vif */
 }
 
 .recommendation-explanation p {
@@ -207,4 +206,34 @@ button.btn-secondary {
 
 .recommendation-explanation p strong {
   color: #2ecc71; /* Vert vif pour les termes importants */
+}
+
+/* Graphique - Fond blanc et texte noir */
+#chart {
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #ffffff; /* Fond blanc pour le graphique */
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+#chart canvas {
+  background-color: #ffffff; /* Fond blanc pour le canvas du graphique */
+}
+
+/* Graphique - Options de texte en noir */
+.chartjs-tooltip {
+  color: #000; /* Texte des tooltips en noir */
+}
+
+.chartjs-legend li span {
+  background-color: #000; /* Couleur noire pour les éléments de la légende */
+}
+
+.chartjs-axis-line {
+  color: #000; /* Couleur noire pour les lignes des axes */
+}
+
+.chartjs-tick {
+  color: #000; /* Couleur noire pour les ticks des axes */
 }

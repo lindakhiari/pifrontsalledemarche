@@ -1,0 +1,92 @@
+<div class="container">
+    <h2>Modifier le Sinistre</h2>
+  
+    <!-- Formulaire de modification -->
+    <form [formGroup]="editForm" class="mt-4">
+      <!-- Champ Nom du Produit -->
+      <div class="form-group">
+        <label for="nomProduit">Nom du Produit</label>
+        <input
+          id="nomProduit"
+          class="form-control"
+          formControlName="nomProduit"
+          placeholder="Nom du produit"
+        />
+        <div
+          *ngIf="editForm.get('nomProduit')?.invalid && editForm.get('nomProduit')?.touched"
+          class="text-danger"
+        >
+          Le nom du produit est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Champ Date du Sinistre -->
+      <div class="form-group">
+        <label for="dateSinistre">Date du Sinistre</label>
+        <input
+          id="dateSinistre"
+          type="date"
+          class="form-control"
+          formControlName="dateSinistre"
+        />
+        <div
+          *ngIf="editForm.get('dateSinistre')?.invalid && editForm.get('dateSinistre')?.touched"
+          class="text-danger"
+        >
+          La date du sinistre est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Champ Montant du Sinistre -->
+      <div class="form-group">
+        <label for="montantSinistre">Montant du Sinistre (€)</label>
+        <input
+          id="montantSinistre"
+          type="number"
+          class="form-control"
+          formControlName="montantSinistre"
+          placeholder="Entrez le montant"
+        />
+        <div
+          *ngIf="editForm.get('montantSinistre')?.invalid && editForm.get('montantSinistre')?.touched"
+          class="text-danger"
+        >
+          Le montant est obligatoire et doit être supérieur ou égal à 0.
+        </div>
+      </div>
+  
+      <!-- Champ État du Sinistre -->
+      <div class="form-group">
+        <label for="etatSinistre">État du Sinistre</label>
+        <select
+          id="etatSinistre"
+          class="form-control"
+          formControlName="etatSinistre"
+        >
+          <option value="" disabled>Sélectionnez un état</option>
+          <option value="En attente">En attente</option>
+          <option value="Approuvé">Approuvé</option>
+          <option value="Rejeté">Rejeté</option>
+        </select>
+        <div
+          *ngIf="editForm.get('etatSinistre')?.invalid && editForm.get('etatSinistre')?.touched"
+          class="text-danger"
+        >
+          L'état du sinistre est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Boutons d'action -->
+      <div class="form-group mt-4">
+        <button
+          class="btn btn-primary"
+          (click)="updateSinistre()"
+          [disabled]="editForm.invalid"
+        >
+          Modifier Sinistre
+        </button>
+        <button class="btn btn-secondary ml-2" (click)="cancel()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  

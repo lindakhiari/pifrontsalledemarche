@@ -1,0 +1,133 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Gestion des Modèles Actuariels</h2>
+
+  <!-- Formulaire pour ajouter ou calculer un modèle -->
+  <form [formGroup]="modeleForm" class="mb-4">
+    <div class="row">
+      <!-- Nom de l'Actif -->
+      <div class="col-md-4">
+        <label for="produitAssurance" class="form-label">Produit Assurance</label>
+        <select
+          id="produitAssurance"
+          class="form-select"
+          formControlName="produitAssurance"
+        >
+          <option *ngFor="let produit of produitsAssurance" [ngValue]="produit">
+            {{ produit.nomProduit }}
+          </option>
+        </select>
+        <div *ngIf="modeleForm.get('produitAssurance')?.invalid && modeleForm.get('produitAssurance')?.touched" class="text-danger">
+          Le produit assurance est obligatoire.
+        </div>
+      </div>
+      
+
+      <!-- Date de Calcul -->
+      <div class="col-md-4">
+        <label for="dateCalcul" class="form-label">Date de Calcul</label>
+        <input
+          id="dateCalcul"
+          type="date"
+          class="form-control"
+          formControlName="dateCalcul"
+        />
+        <div *ngIf="modeleForm.get('dateCalcul')?.invalid && modeleForm.get('dateCalcul')?.touched" class="text-danger">
+          La date de calcul est obligatoire.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Type Modele</label>
+        <div class="form-check">
+          <input
+            id="modelisationSinistre"
+            type="radio"
+            class="form-check-input"
+            formControlName="typeModele"
+            value="MODELISATION_SINISTRE"
+          />
+          <label for="modelisationSinistre" class="form-check-label">Modelisation Sinistre</label>
+        </div>
+        <div class="form-check">
+          <input
+            id="provisionnement"
+            type="radio"
+            class="form-check-input"
+            formControlName="typeModele"
+            value="PROVISONNEMENT"
+          />
+          <label for="provisionnement" class="form-check-label">Provisionnement</label>
+        </div>
+      </div>
+      
+      <!-- Enregistrer dans la base de données -->
+      <div class="col-md-4">
+        <label class="form-label">Enregistrer dans la base ?</label>
+        <div class="form-check">
+          <input
+            id="saveToDatabase"
+            type="checkbox"
+            class="form-check-input"
+            formControlName="saveToDatabase"
+          />
+          <label for="saveToDatabase" class="form-check-label">Oui</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="mt-3 text-center">
+      <button class="btn btn-primary me-2" type="button" (click)="calculateValeurEstimee()" [disabled]="modeleForm.invalid">
+        Calculer Valeur Estimée
+      </button>
+      <button class="btn btn-success" type="button" (click)="addModeleActuariel()" [disabled]="modeleForm.invalid">
+        Ajouter Modèle
+      </button>
+    </div>
+  </form>
+
+  <!-- Liste des modèles actuariels -->
+  <div class="mt-4">
+    <h4>Liste des Modèles Actuariels</h4>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nom Actif</th>
+          <th>Date Calcul</th>
+          <th>Valeur Estimée</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let modele of modeleActuariels">
+          <td>{{ modele.idModele }}</td>
+          <td>{{ modele.nomActif }}</td>
+          <td>{{ modele.dateCalcul }}</td>
+          <td>{{ modele.valeurEstimee }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="updateModeleActuariel(modele.idModele)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteModeleActuariel(modele.idModele)">Supprimer</button>
+            <button class="btn btn-secondary btn-sm" (click)="getPredictionsByAssetName(modele.nomActif)">
+              Prédictions
+            </button>
+            <button class="btn btn-warning btn-sm" (click)="showPredictionChart(modele.nomActif)">
+              Graphique
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section des prédictions -->
+  <div *ngIf="predictions.length > 0" class="mt-4">
+    <app-monthly-bar-chart [predictions]="predictions"></app-monthly-bar-chart>
+
+  </div>
+
+  <!-- Section du graphique des prédictions -->
+  <div *ngIf="predictionChartBase64" class="mt-4 text-center">
+    <h4>Graphique des Prédictions</h4>
+    <img [src]="'data:image/png;base64,' + predictionChartBase64" alt="Graphique des prédictions" class="img-fluid" />
+  </div>
+</div>

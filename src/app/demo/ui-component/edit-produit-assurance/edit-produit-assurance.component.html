@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Modifier un Produit d'Assurance</h2>
+  
+    <form [formGroup]="editForm" class="needs-validation" novalidate>
+      <!-- Nom du Produit -->
+      <div class="form-group">
+        <label for="nomProduit" class="form-label">Nom du Produit</label>
+        <input
+          id="nomProduit"
+          type="text"
+          class="form-control"
+          formControlName="nomProduit"
+          placeholder="Entrez le nom du produit"
+          [class.is-invalid]="editForm.get('nomProduit')?.invalid && editForm.get('nomProduit')?.touched"
+          aria-describedby="nomProduitHelp"
+        />
+        <div id="nomProduitHelp" class="invalid-feedback">
+          Le nom du produit est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Prime -->
+      <div class="form-group">
+        <label for="prime" class="form-label">Prime (€)</label>
+        <input
+          id="prime"
+          type="number"
+          class="form-control"
+          formControlName="prime"
+          placeholder="Entrez la prime"
+          [class.is-invalid]="editForm.get('prime')?.invalid && editForm.get('prime')?.touched"
+          aria-describedby="primeHelp"
+        />
+        <div id="primeHelp" class="invalid-feedback">
+          La prime est obligatoire et doit être supérieure ou égale à 0.
+        </div>
+      </div>
+  
+      <!-- Couverture -->
+      <div class="form-group">
+        <label for="couverture" class="form-label">Couverture (€)</label>
+        <input
+          id="couverture"
+          type="number"
+          class="form-control"
+          formControlName="couverture"
+          placeholder="Entrez la couverture"
+          [class.is-invalid]="editForm.get('couverture')?.invalid && editForm.get('couverture')?.touched"
+          aria-describedby="couvertureHelp"
+        />
+        <div id="couvertureHelp" class="invalid-feedback">
+          La couverture est obligatoire et doit être supérieure ou égale à 0.
+        </div>
+      </div>
+  
+      <!-- Type d'Assurance -->
+      <div class="form-group">
+        <label for="atype" class="form-label">Type d'Assurance</label>
+        <select
+          id="atype"
+          class="form-control"
+          formControlName="atype"
+          [class.is-invalid]="editForm.get('atype')?.invalid && editForm.get('atype')?.touched"
+          aria-describedby="atypeHelp"
+        >
+          <option value="" disabled>Sélectionnez un type</option>
+          <option value="CRYPTO">Crypto</option>
+          <option value="OBLIGATION">Obligation</option>
+          <option value="ACTIONS">Actions</option>
+          <option value="FOREX">Forex</option>
+        </select>
+        <div id="atypeHelp" class="invalid-feedback">
+          Le type d'assurance est obligatoire.
+        </div>
+      </div>
+  
+      <!-- Boutons -->
+      <div class="form-group mt-4 text-center">
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          (click)="updateProduit()"
+          [disabled]="editForm.invalid"
+        >
+          Modifier le Produit
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="router.navigate(['/produits'])">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+  

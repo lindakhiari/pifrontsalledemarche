@@ -6,6 +6,9 @@ import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.compon
 import { GuestComponent } from './theme/layouts/guest/guest.component';
 import { RecommendationChartComponent } from './recommendation-chart/recommendation-chart.component';  // Import du composant
 import { SentimentChartComponent } from './components/sentiment-chart/sentiment-chart.component';
+import { SinistreEditComponent } from './demo/ui-component/sinistre-edit/sinistre-edit.component';
+import { EditProduitAssuranceComponent } from './demo/ui-component/edit-produit-assurance/edit-produit-assurance.component';
+import { EditModeleActuarielComponent } from './demo/ui-component/edit-modele-actuariel/edit-modele-actuariel.component';
 
 const adminRoutes: Routes = [
   {
@@ -27,6 +30,28 @@ const adminRoutes: Routes = [
       { path: 'liste-user', loadComponent: () => import('./components/user-list/user-list.component').then(m => m.UserListComponent) },
       { path: 'modifier-user/:id', loadComponent: () => import('src/app/user-edit/user-edit.component').then(m => m.UserEditComponent) },
       { path: 'dashboard/default', loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent) },
+
+      {
+        path: 'produits',
+        loadComponent: () => import('./demo/ui-component/produit-assurance/produit-assurance.component').then((c) => c.ProduitAssuranceComponent)
+      },
+
+      {
+        path: 'modele-actuariel',
+        loadComponent: () => import('./demo/ui-component/modele-actuariel/modele-actuariel.component').then((c) => c.ModeleActuarielComponent)
+      },
+
+
+      {
+        path: 'sinistre-s',
+        loadComponent: () => import('./demo/ui-component/sinistre-s/sinistre-s.component').then((c) => c.SinistreSComponent)
+      },
+
+      { path: 'sinistres/:id/edit', component: SinistreEditComponent },
+
+      { path: 'produits/:id/edit', component: EditProduitAssuranceComponent },
+
+      { path: 'modeles/:id/edit', component: EditModeleActuarielComponent },
 
 
     ]

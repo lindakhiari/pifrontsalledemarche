@@ -1,74 +1,359 @@
-/* Fond bleu foncé et moderne */
+/* Couleurs de fond et texte */
 .bg-dark-blue {
-  background-color: #05051a; /* Bleu nuit profond */
-  border-radius: 12px; /* Légèrement arrondi pour un design moderne */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombre subtile pour plus de profondeur */
-  padding: 20px; /* Espacement interne pour une meilleure lisibilité */
+  background: linear-gradient(135deg, #10102e, #3a3a6b); /* Couleur de fond plus foncée */
 }
 
-/* Texte doré élégant */
-.text-gold {
-  color: #d4af37; /* Doré plus raffiné */
-  font-weight: 600; /* Texte semi-gras pour une meilleure lisibilité */
-  letter-spacing: 0.5px; /* Espacement entre les lettres pour un style moderne */
+.text-light {
+  color: #f0f0f0;
 }
 
-/* Champs de formulaire avec arrière-plan bleu profond */
-.bg-light-blue {
-  background-color: #1b1b3a; /* Bleu profond */
-  border: 1px solid #333; /* Bordure subtile et sombre */
-  color: #eaeaea; /* Texte blanc cassé pour réduire la fatigue visuelle */
-  padding: 10px; /* Espacement interne pour un meilleur confort */
-  border-radius: 6px; /* Coins légèrement arrondis */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Tables */
+.table-striped tbody tr:nth-of-type(odd) {
+  background: linear-gradient(135deg, #10102e, #3a3a6b); /* Couleur de fond plus foncée pour les lignes impaires */
 }
 
-/* Effet de focus pour les champs de formulaire */
-.bg-light-blue:focus {
-  border-color: #d4af37; /* Bordure dorée en focus */
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.8); /* Ombre dorée subtile */
-  outline: none; /* Suppression du contour par défaut */
+.table-dark th, .table-dark td {
+  border: 1px solid #444; /* Bordure plus marquée */
 }
 
-/* Boutons dorés modernes */
-.btn-gold {
-  background-color: #d4af37; /* Fond doré raffiné */
-  color: #05051a; /* Texte bleu nuit */
-  border: 1px solid #d4af37; /* Bordure dorée */
-  font-weight: bold;
-  border-radius: 10px; /* Coins arrondis pour un style moderne */
-  padding: 10px 20px; /* Espacement interne pour une meilleure ergonomie */
-  text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+.table-dark thead th {
+  background-color: #2c3e50; /* En-tête plus foncé */
+  color: #f0f0f0; /* Texte clair pour l'en-tête */
+  font-weight: bold; /* Texte en gras pour les en-têtes */
 }
 
-/* Effet de survol pour les boutons */
-.btn-gold:hover {
-  background-color: #b8860b; /* Doré plus foncé et luxueux */
-  color: #ffffff; /* Texte blanc pour un contraste élégant */
-  transform: scale(1.05); /* Légère mise en avant au survol */
+.table-dark tbody tr:hover {
+  background-color: #34495e; /* Couleur de survol plus claire */
+}
+
+/* Boutons dorés */
+.btn-golden {
+  background-color: #f39c12; /* Or doré */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-golden:hover {
+  background-color: #e67e22; /* Couleur dorée plus foncée au survol */
   cursor: pointer;
 }
 
-/* Effet actif pour les boutons */
-.btn-gold:active {
-  background-color: #8b6508; /* Doré encore plus foncé */
-  transform: scale(0.98); /* Légère réduction pour simuler un clic */
+/* Ombres et bordures */
+.shadow-sm {
+  box-shadow: 0 4px 6px rgba(224, 221, 221, 0.15); /* Ombre plus marquée */
 }
 
-/* Ajout d'une animation subtile */
-.btn-gold {
-  animation: fadeIn 0.5s ease-in-out;
+.border {
+  border: 1px solid #6b717c;
 }
 
-/* Animation d'apparition */
+/* Animations */
+.animated {
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+/* Conteneur principal */
+.prediction-container {
+  background-color: #1e2a47; /* Fond bleu foncé */
+  border: 1px solid #e0e0e0; /* Bordure subtile */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  color: #fff; /* Texte blanc sur fond bleu foncé */
+}
+
+/* Titre */
+h3 {
+  color: #fff; /* Texte blanc */
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Texte de la décision */
+.prediction-result p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* Texte vert pour l'achat */
+.text-success {
+  color: #28a745 !important; /* Couleur verte plus claire */
+}
+
+/* Texte rouge pour la vente */
+.text-danger {
+  color: #dc3545 !important; /* Couleur rouge plus claire */
+}
+
+/* Barre de progression */
+.progress {
+  height: 20px;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+}
+
+/* Barre de progression avec couleurs dynamiques */
+.progress-bar {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Barre de progression verte (confiance élevée) */
+.bg-success {
+  background-color: #4caf50; /* Vert clair */
+}
+
+/* Barre de progression rouge (confiance faible) */
+.bg-danger {
+  background-color: #e53935; /* Rouge clair */
+}
+
+/* Affichage du timestamp */
+p strong {
+  font-weight: 600;
+  color: #fff; /* Texte blanc pour le timestamp */
+}
+
+/* Section de chargement */
+.loading-section {
+  font-size: 1.2rem;
+  color: #f1f1f1; /* Texte clair pour le chargement */
+  margin-top: 20px;
+}
+
+.loading-section .progress-bar {
+  background-color: #007bff; /* Bleu pour l'indicateur de chargement */
+}
+
+/* Section d'erreur */
+.error-section {
+  font-size: 1.1rem;
+  color: #e53935; /* Rouge pour l'erreur */
+  margin-top: 20px;
+}
+
+/* Animation de la barre de progression */
+@keyframes loading {
+  0% {
+    width: 0%;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    width: 100%;
   }
+}
+/* Conteneur des positions ouvertes */
+.positions-container {
+  background: linear-gradient(to right, #2c3e50, #34495e, #1abc9c); /* Dégradé personnalisé */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition pour l'effet de survol */
+}
+
+/* Effet de survol (hover) */
+.positions-container:hover {
+  transform: translateY(-5px); /* Légère élévation au survol */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+/* Titre des positions ouvertes */
+.positions-container h3 {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Espacement des lettres pour un effet moderne */
+}
+
+/* Ajouter un effet de survol sur les éléments internes (ex. boutons, liens) */
+.positions-container a:hover,
+.positions-container button:hover {
+  background-color: #1abc9c; /* Changer la couleur de fond au survol */
+  color: #fff; /* Texte en blanc */
+  transform: scale(1.05); /* Agrandir légèrement au survol */
+  transition: all 0.2s ease-in-out; /* Transition fluide */
+}
+
+/* Style pour les éléments de texte internes */
+.positions-container p,
+.positions-container span {
+  color: #ecf0f1; /* Texte clair pour une bonne lisibilité */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Bordure de la section (si nécessaire) */
+.positions-container.border-0 {
+  border: none; /* Retirer la bordure si nécessaire */
+}
+
+/* Ombre portée sur le conteneur */
+.positions-container.shadow-xl {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Ombre plus forte pour un effet de profondeur */
+}
+/* Conteneur des prédictions */
+.prediction-container {
+  background: linear-gradient(to right, #2c3e50, #34495e, #1abc9c); /* Dégradé personnalisé */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition pour l'effet de survol */
+}
+
+/* Effet de survol (hover) */
+.prediction-container:hover {
+  transform: translateY(-5px); /* Légère élévation au survol */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+/* Titre des prédictions */
+.prediction-container h3 {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Espacement des lettres pour un effet moderne */
+}
+
+/* Résultat de l'analyse (décision) */
+.prediction-container .prediction-result {
+  color: #ecf0f1; /* Texte clair pour une bonne lisibilité */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.prediction-container .prediction-result p {
+  margin-bottom: 1rem;
+}
+
+/* Décision d'achat ou de vente */
+.prediction-container .prediction-result p.text-success {
+  color: #2ecc71; /* Vert pour "Acheter" */
+}
+
+.prediction-container .prediction-result p.text-danger {
+  color: #e74c3c; /* Rouge pour "Vendre" */
+}
+
+/* Confiance avec barre de progression */
+.prediction-container .progress {
+  background-color: #34495e; /* Fond de la barre de progression */
+  border-radius: 8px;
+  height: 10px;
+}
+
+.prediction-container .progress-bar {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.5s ease; /* Transition fluide pour la barre de progression */
+}
+
+/* Couleurs dynamiques pour la barre de confiance */
+.prediction-container .progress-bar.bg-success {
+  background-color: #2ecc71; /* Vert pour la confiance élevée */
+}
+
+.prediction-container .progress-bar.bg-warning {
+  background-color: #f39c12; /* Jaune pour la confiance moyenne */
+}
+
+.prediction-container .progress-bar.bg-danger {
+  background-color: #e74c3c; /* Rouge pour la faible confiance */
+}
+
+/* Section d'erreur */
+.prediction-container .error-section {
+  color: #e74c3c; /* Rouge pour les erreurs */
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Section de chargement */
+.prediction-container .loading-section {
+  color: #ecf0f1; /* Texte clair pour la section de chargement */
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Formatage du timestamp */
+.prediction-container .prediction-result p strong {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Espacement entre les éléments internes */
+.prediction-container .mb-4 {
+  margin-bottom: 1.5rem; /* Espacement entre le titre et les éléments suivants */
+}
+
+/* Espacement entre les éléments internes */
+.positions-container .mb-4 {
+  margin-bottom: 1.5rem; /* Espacement entre le titre et les éléments suivants */
+}
+
+/* Si vous souhaitez un cercle de pourcentage (avec NgCircleProgressModule) */
+.circle-progress {
+  margin: 20px auto;
+  max-width: 150px;
+}
+
+
+/* Amélioration de la table dynamique */
+.table-responsive {
+  overflow-x: auto;
+  max-height: 400px;
+}
+
+.table-striped {
+  transition: transform 0.3s ease;
+}
+
+.table-striped:hover {
+  transform: scale(1.02); /* Effet de zoom léger au survol */
+}
+.order-book-container {
+  background: linear-gradient(to right, #2c3e50, #34495e, #1e2a47);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.order-book-container h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #fff;
 }
